@@ -13,6 +13,7 @@ public interface ConductorService {
          ResponseEntity<Conductor> findConductorById(String idNumber);
          ResponseEntity<Conductor> updateConductorById(String idNumber);
          ResponseEntity<Conductor> deleteConductorById(String idNumber);
+         ResponseEntity<List<Conductor>> findConductorbyVehicle(String registrationNumber);
          ResponseEntity<List<Conductor>> findAllConductors();
          
 
