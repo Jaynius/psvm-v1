@@ -1,6 +1,16 @@
 package com.jaynius.psvmv1.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -14,10 +24,17 @@ import lombok.Setter;
 @Getter
 @Data
 public class Users {
+    @Id
     private String idNumber;
     private String name,contacts,email;
 
-    private Vehicle vehicle;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+        name = "userVehicle",
+        joinColumns={@JoinColumn(name = "userid")},
+        inverseJoinColumns = {@JoinColumn(name="vehicle_registration")}
+    )
+    private Set<Vehicle> vehicles=new HashSet<>();
 
     
 }

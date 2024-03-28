@@ -1,8 +1,8 @@
 package com.jaynius.psvmv1.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +21,8 @@ public class Conductor {
     private String idNumber;
     private String name, contacts,email;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name = "vehicle_registration")
     private Vehicle vehicle;
 
     
