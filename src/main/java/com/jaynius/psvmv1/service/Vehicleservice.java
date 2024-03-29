@@ -2,6 +2,7 @@ package com.jaynius.psvmv1.service;
 
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public interface Vehicleservice {
      ResponseEntity<Vehicle> updateVehicleByRegistration(Vehicle vehicle,String registrationNumber);
      ResponseEntity<Vehicle> deleteVehicleByRegistration(String registrationNumber);
      ResponseEntity<List<Vehicle>> findAllVehicles();
-     ResponseEntity<List<Vehicle>> findVehicleByOwnerId(String idNumber);
+     ResponseEntity<Set<Vehicle>> findVehicleByOwnerId(String idNumber);
     
      
 

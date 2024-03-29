@@ -14,6 +14,6 @@ public interface DriverService {
     ResponseEntity<Driver> updateDriverById(Driver driver,String idNumber);
     ResponseEntity<Driver> deleteDriverById(String idNumber);
     ResponseEntity<List<Driver>> findAllDrivers();
-    ResponseEntity<List<Driver>> findDriverByVehicle(String registrationNumber);
+    ResponseEntity<Driver> findDriverByVehicle(String registrationNumber);
 
 }

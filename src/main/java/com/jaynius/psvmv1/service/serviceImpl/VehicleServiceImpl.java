@@ -33,6 +33,7 @@ public class VehicleServiceImpl implements Vehicleservice{
 
    
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Vehicle> createVehicle(Vehicle vehicle) {
      repository.save(vehicle);
@@ -41,6 +42,7 @@ public class VehicleServiceImpl implements Vehicleservice{
 
     @Override
     public ResponseEntity<Vehicle> findVehicleByRegistration(String registrationNumber) {
+        @SuppressWarnings("null")
         Optional<Vehicle> vehicle=repository.findById(registrationNumber);
         if (vehicle.isPresent()) {
             return new ResponseEntity<>(vehicle.get(),HttpStatus.FOUND);
@@ -51,6 +53,7 @@ public class VehicleServiceImpl implements Vehicleservice{
 
     @Override
     public ResponseEntity<Vehicle> updateVehicleByRegistration(Vehicle vehicle, String registrationNumber) {
+        @SuppressWarnings("null")
         Optional<Vehicle> existingVehicle=repository.findById(registrationNumber);
         if (existingVehicle.isPresent()) {
             Vehicle updatedVehicle=existingVehicle.get();
@@ -71,6 +74,7 @@ public class VehicleServiceImpl implements Vehicleservice{
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Vehicle> deleteVehicleByRegistration(String registrationNumber) {
         Optional<Vehicle> vehicle=repository.findById(registrationNumber);
@@ -93,6 +97,7 @@ public class VehicleServiceImpl implements Vehicleservice{
        return new ResponseEntity<>(vehicleList,HttpStatus.FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Set<Vehicle>> findVehicleByOwnerId(String idNumber) {
        Optional<VehicleOwners> optionalOwner=vOwnerRepository.findById(idNumber);

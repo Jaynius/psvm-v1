@@ -30,6 +30,7 @@ public class InspectionServiceImpl implements InspectionService {
 
     
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Inspection> addInspection(Inspection inspection) {
         repository.save(inspection);
@@ -39,6 +40,7 @@ public class InspectionServiceImpl implements InspectionService {
     @Override
     public ResponseEntity<Inspection> findInspectionById(Long id) {
    
+        @SuppressWarnings("null")
         Optional<Inspection> inspection=repository.findById(id);
         if (inspection.isPresent()) {
             return new ResponseEntity<>(inspection.get(),HttpStatus.FOUND);
@@ -49,6 +51,7 @@ public class InspectionServiceImpl implements InspectionService {
 
     @Override
     public ResponseEntity<Inspection> updateInspectionById(Inspection inspection, Long id) {
+        @SuppressWarnings("null")
         Optional<Inspection> existingInspection=repository.findById(id);
         if (existingInspection.isPresent()) {
             Inspection updatedInspection=existingInspection.get();
@@ -72,6 +75,7 @@ public class InspectionServiceImpl implements InspectionService {
 
     @Override
     public ResponseEntity<List<Inspection>> findInspectionByVehicleId(String registrationNumber) {
+        @SuppressWarnings("null")
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalVehicle.isPresent()) {
             Vehicle vehicle=optionalVehicle.get();
@@ -84,7 +88,8 @@ public class InspectionServiceImpl implements InspectionService {
 
     @Override
     public ResponseEntity<Inspection> deleteInspectionById(Long id) {
-       Optional<Inspection> inspection=repository.findById(id);
+       @SuppressWarnings("null")
+    Optional<Inspection> inspection=repository.findById(id);
        if (inspection.isPresent()) {
         repository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
