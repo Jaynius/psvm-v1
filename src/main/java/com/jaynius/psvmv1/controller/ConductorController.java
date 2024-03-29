@@ -35,11 +35,11 @@ public class ConductorController {
 
     @PostMapping("/conductors/conductor/update/{idnumber}")
     public ResponseEntity<Conductor> updateConductorById(@RequestBody Conductor conductor,@PathVariable String idNumber){
-        return service.updateConductorById(idNumber);
+        return service.updateConductorById(idNumber, conductor);
     }
 
     @GetMapping("/conductors/{vehicle}")
-    public ResponseEntity<List<Conductor>> findconductorByVehicle(@PathVariable String registrationNumber){
+    public ResponseEntity<Conductor> findconductorByVehicle(@PathVariable String registrationNumber){
         return service.findConductorbyVehicle(registrationNumber);
     }
     @GetMapping("/conductors/all")

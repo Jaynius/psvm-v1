@@ -11,9 +11,9 @@ import com.jaynius.psvmv1.model.Conductor;
 public interface ConductorService {
          ResponseEntity<Conductor> addConductor(Conductor conductor);
          ResponseEntity<Conductor> findConductorById(String idNumber);
-         ResponseEntity<Conductor> updateConductorById(String idNumber);
+         ResponseEntity<Conductor> updateConductorById(String idNumber,Conductor conductor);
          ResponseEntity<Conductor> deleteConductorById(String idNumber);
-         ResponseEntity<List<Conductor>> findConductorbyVehicle(String registrationNumber);
+         ResponseEntity<Conductor> findConductorbyVehicle(String registrationNumber);
          ResponseEntity<List<Conductor>> findAllConductors();
          
 

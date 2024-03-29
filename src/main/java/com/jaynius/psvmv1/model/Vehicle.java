@@ -8,6 +8,7 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -40,8 +41,13 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
     private List<Inspection> inspections=new ArrayList<>();
 
-    @OneToMany(mappedBy = "vehicles",cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "vehicles",cascade = CascadeType.ALL)
     private Set<Users> users=new HashSet<>();
+
+    @ManyToMany(mappedBy = "vehicle",cascade = CascadeType.ALL)
+    private Set<VehicleOwners> owners=new HashSet<>();
+
+    
     
 
 

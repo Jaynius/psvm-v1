@@ -14,6 +14,6 @@ public interface TrackerService {
     ResponseEntity<Tracker> updateTrackerById( Tracker tracker,String serialNumber);
     ResponseEntity<Tracker> deleteTrackerById(String serialNumber);
     ResponseEntity<List<Tracker>> findAllTrackers();
-    ResponseEntity<List<Tracker>> findTrackerByVehicle(String registrationnumber);
+    ResponseEntity<Tracker> findTrackerByVehicle(String registrationnumber);
 
 }

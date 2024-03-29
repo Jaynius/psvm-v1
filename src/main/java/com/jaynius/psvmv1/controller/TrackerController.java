@@ -22,7 +22,7 @@ public class TrackerController {
         this.service = service;
     }
 
-    @PostMapping("/drivers/add")
+    @PostMapping("/trackers/add")
     public  ResponseEntity<Tracker> addTracker(@RequestBody Tracker tracker){
         return service.addTracker(tracker);
 
@@ -48,7 +48,7 @@ public class TrackerController {
 
     }
     @GetMapping("/tracker/vehicle/{registrationNumber}")
-    ResponseEntity<List<Tracker>> findTrackerByVehicle( @PathVariable String registrationnumber){
+    ResponseEntity<Tracker> findTrackerByVehicle( @PathVariable String registrationnumber){
         return service.findTrackerByVehicle(registrationnumber);
     }
 
