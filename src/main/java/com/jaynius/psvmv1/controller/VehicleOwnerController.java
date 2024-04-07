@@ -1,6 +1,7 @@
 package com.jaynius.psvmv1.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,7 @@ public class VehicleOwnerController {
 
     @GetMapping("/owners/owner/{idNumber}")
     public ResponseEntity<VehicleOwners> findOwnersById(@PathVariable String idNumber){
-        return service.deleteOwnersById(idNumber);
+        return service.findOwnersById(idNumber);
     }
 
     @PutMapping("/owner/update/{idnumber}")
@@ -37,15 +38,15 @@ public class VehicleOwnerController {
     }
 
     @GetMapping("/owners/vehicle/{registrationNumber}")
-    public ResponseEntity<List<VehicleOwners>> findOwnersByVehicleId(@PathVariable String registrationNumber){
+    public ResponseEntity<Set<VehicleOwners>> findOwnersByVehicleId(@PathVariable String registrationNumber){
         return service.findOwnersByVehicleId(registrationNumber);
     }
     @DeleteMapping("/owners/delete/{idnumber}")
-    public ResponseEntity<VehicleOwners> deleteOwnersById(@PathVariable String idNumber){
-        return service.deleteOwnersById(idNumber);
-    }
+    public void deleteOwnersById(@PathVariable String idNumber){
+        service.deleteOwnersById(idNumber);
+    } 
     @GetMapping("/owners")
-    public ResponseEntity<List<VehicleOwners>> findAllOwners(){
+    public List<VehicleOwners> findallOwners(){
         return service.findAllOwners();
     }
 

@@ -3,6 +3,8 @@ package com.jaynius.psvmv1.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -23,7 +25,7 @@ import lombok.Setter;
 public class VehicleOwners {
     @Id
     private String idNumber;
-    private String logBookNumber,name,contacts,email;
+    private String logBookNumber,name,contacts,email, password;
 
     @ManyToMany
     @JoinTable(name = "owner_vehicle",
@@ -31,5 +33,9 @@ public class VehicleOwners {
         inverseJoinColumns = {@JoinColumn(name="vehicle_registration")}
     )
     private Set<Vehicle> vehicle=new HashSet<>();
-    
+     public void setPassword(String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
+        
+    }
 }

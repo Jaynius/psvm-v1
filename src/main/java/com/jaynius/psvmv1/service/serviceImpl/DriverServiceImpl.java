@@ -28,6 +28,7 @@ public class DriverServiceImpl implements DriverService{
 
    
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Driver> addDriver(Driver driver) {
        repository.save(driver);
@@ -36,6 +37,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public ResponseEntity<Driver> findDriverById(String idNumber) {
+        @SuppressWarnings("null")
         Optional<Driver> driver=repository.findById(idNumber);
         if (driver.isPresent()) {
             return new ResponseEntity<>(driver.get(),HttpStatus.FOUND);
@@ -46,7 +48,8 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public ResponseEntity<Driver> updateDriverById(Driver driver, String idNumber) {
-      Optional<Driver> existingDriver=repository.findById(idNumber);
+      @SuppressWarnings("null")
+    Optional<Driver> existingDriver=repository.findById(idNumber);
       if (existingDriver.isPresent()) {
         Driver updatedDriver=existingDriver.get();
         updatedDriver.setIdnumber(driver.getIdnumber());
@@ -61,8 +64,10 @@ public class DriverServiceImpl implements DriverService{
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Driver> deleteDriverById(String idNumber) {
+        @SuppressWarnings("null")
         Optional<Driver> existingDriver=repository.findById(idNumber);
         if (existingDriver.isPresent()) {
             repository.deleteById(idNumber);
@@ -87,6 +92,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public ResponseEntity<Driver> findDriverByVehicle(String registrationNumber) {
+        @SuppressWarnings("null")
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalVehicle.isPresent()) {
             Vehicle vehicle=optionalVehicle.get();

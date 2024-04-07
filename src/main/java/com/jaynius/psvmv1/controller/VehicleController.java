@@ -1,6 +1,7 @@
 package com.jaynius.psvmv1.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,7 +47,7 @@ public class VehicleController {
     }
 
     @GetMapping("/vehicle/owner/{idNumber}")
-    public ResponseEntity<List<Vehicle>> findVehicleByOwnerId(String idNumber){
+    public ResponseEntity<Set<Vehicle>> findVehicleByOwnerId(String idNumber){
         return service.findVehicleByOwnerId(idNumber);
     }
 

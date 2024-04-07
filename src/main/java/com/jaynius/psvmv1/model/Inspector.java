@@ -13,33 +13,29 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 @Data
-public class Users {
+public class Inspector {
     @Id
     private String idNumber;
-    private String name,contacts,email,password;
+    private String name,email,contact,password;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+       @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-        name = "userVehicle",
-        joinColumns={@JoinColumn(name = "userid")},
-        inverseJoinColumns = {@JoinColumn(name="vehicle_registration")}
+        name = "inspector_inspections",
+        joinColumns={@JoinColumn(name = "inspectorId")},
+        inverseJoinColumns = {@JoinColumn(name="inpsection_id")}
     )
-    private Set<Vehicle> vehicles=new HashSet<>();
+    private Set<Inspection> inspections=new HashSet<>();
+
      public void setPassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.password = encoder.encode(password);
         
     }
 
-    
 }

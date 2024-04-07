@@ -30,6 +30,7 @@ public class UserServiceImpl implements UsersService {
 
    
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Users> addUsers(Users user) {
         repository.save(user);
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UsersService {
 
     @Override
     public ResponseEntity<Users> findUserById(String idnumber) {
+        @SuppressWarnings("null")
         Optional<Users> user=repository.findById(idnumber);
         if (user.isPresent()) {
             return new ResponseEntity<>(user.get(),HttpStatus.FOUND);
@@ -50,7 +52,8 @@ public class UserServiceImpl implements UsersService {
 
     @Override
     public ResponseEntity<Set<Users>> findUsersByVehicle(String registrationNumber) {
-       Optional<Vehicle> optionaVehicle=vRepository.findById(registrationNumber);
+       @SuppressWarnings("null")
+    Optional<Vehicle> optionaVehicle=vRepository.findById(registrationNumber);
        if (optionaVehicle.isPresent()) {
         Vehicle vehicle=optionaVehicle.get();
         Set<Users> users=vehicle.getUsers();
@@ -62,6 +65,7 @@ public class UserServiceImpl implements UsersService {
 
     @Override
     public ResponseEntity<Users> updateUserById(Users user, String idNumber) {
+        @SuppressWarnings("null")
         Optional<Users> existingUser=repository.findById(idNumber);
         if (existingUser.isPresent()) {
             Users updatedUser=existingUser.get();
@@ -78,6 +82,7 @@ public class UserServiceImpl implements UsersService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Users> deleteUserById(String idnumber) {
         Optional<Users> user=repository.findById(idnumber);

@@ -14,8 +14,8 @@ public interface VehicleOwnerService {
     ResponseEntity<VehicleOwners> findOwnersById(String idNumber);
     ResponseEntity<VehicleOwners> updateOwnersById(VehicleOwners owner,String idNumber);
     ResponseEntity<Set<VehicleOwners>> findOwnersByVehicleId(String registrationNumber);
-    ResponseEntity<VehicleOwners> deleteOwnersById(String idNumber);
-    ResponseEntity<List<VehicleOwners>> findAllOwners();
+      void deleteOwnersById(String idNumber);
+    List<VehicleOwners> findAllOwners();
 
 
 }

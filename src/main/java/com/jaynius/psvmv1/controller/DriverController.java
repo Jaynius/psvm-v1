@@ -37,7 +37,7 @@ public class DriverController {
         return service.updateDriverById(driver, idNumber);
     }
     @GetMapping("/drivers/driver/vehicle/{registrationnumber}")
-    public ResponseEntity<List<Driver>> findDriversByVehicleid(@PathVariable String registrationNumber){
+    public ResponseEntity<Driver> findDriversByVehicleid(@PathVariable String registrationNumber){
         return service.findDriverByVehicle(registrationNumber);
     }
 

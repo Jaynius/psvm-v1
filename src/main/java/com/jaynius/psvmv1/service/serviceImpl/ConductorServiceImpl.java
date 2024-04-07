@@ -27,6 +27,7 @@ public class ConductorServiceImpl implements ConductorService {
     @Autowired
     private final VehicleRepository vRepository;
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Conductor> addConductor(Conductor conductor) {
       repository.save(conductor);
@@ -35,6 +36,7 @@ public class ConductorServiceImpl implements ConductorService {
 
     @Override
     public ResponseEntity<Conductor> findConductorById(String idNumber) {
+        @SuppressWarnings("null")
         Optional<Conductor> existtingConductor=repository.findById(idNumber);
         if (existtingConductor.isPresent()) {
             return new ResponseEntity<>(existtingConductor.get(),HttpStatus.FOUND);
@@ -45,6 +47,7 @@ public class ConductorServiceImpl implements ConductorService {
 
     @Override
     public ResponseEntity<Conductor> updateConductorById(String idNumber, Conductor conductor) {
+        @SuppressWarnings("null")
         Optional<Conductor> existingConductor=repository.findById(idNumber);
         if (existingConductor.isPresent()) {
             Conductor conductorToUpdate=existingConductor.get();
@@ -60,6 +63,7 @@ public class ConductorServiceImpl implements ConductorService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Conductor> deleteConductorById(String idNumber) {
         repository.deleteById(idNumber);
@@ -68,7 +72,8 @@ public class ConductorServiceImpl implements ConductorService {
 
     @Override
     public ResponseEntity<Conductor> findConductorbyVehicle(String registrationNumber) {
-      Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
+      @SuppressWarnings("null")
+    Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
       if (optionalVehicle.isPresent()) {
         Vehicle vehicle=optionalVehicle.get();
         Conductor conductor=vehicle.getConductor();

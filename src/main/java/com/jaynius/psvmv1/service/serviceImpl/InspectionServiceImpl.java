@@ -86,6 +86,7 @@ public class InspectionServiceImpl implements InspectionService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Inspection> deleteInspectionById(Long id) {
        @SuppressWarnings("null")

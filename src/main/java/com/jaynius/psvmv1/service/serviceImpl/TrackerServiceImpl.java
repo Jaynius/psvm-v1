@@ -31,6 +31,7 @@ public class TrackerServiceImpl implements TrackerService{
 
    
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Tracker> addTracker(Tracker tracker) {
         repository.save(tracker);
@@ -39,7 +40,8 @@ public class TrackerServiceImpl implements TrackerService{
 
     @Override
     public ResponseEntity<Tracker> findTrackerById(String serialNumber) {
-       Optional<Tracker> tracker=repository.findById(serialNumber);
+       @SuppressWarnings("null")
+    Optional<Tracker> tracker=repository.findById(serialNumber);
        if (tracker.isPresent()) {
         return new ResponseEntity<>(tracker.get(),HttpStatus.FOUND);
         
@@ -49,7 +51,8 @@ public class TrackerServiceImpl implements TrackerService{
 
     @Override
     public ResponseEntity<Tracker> updateTrackerById(Tracker tracker, String serialNumber) {
-       Optional<Tracker> existingTracker=repository.findById(serialNumber);
+       @SuppressWarnings("null")
+    Optional<Tracker> existingTracker=repository.findById(serialNumber);
        if (existingTracker.isPresent()) {
         Tracker updatedTracker=existingTracker.get();
         updatedTracker.setSerialNumber(tracker.getSerialNumber());
@@ -64,6 +67,7 @@ public class TrackerServiceImpl implements TrackerService{
        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Tracker> deleteTrackerById(String serialNumber) {
         Optional<Tracker> tracker=repository.findById(serialNumber);
@@ -88,6 +92,7 @@ public class TrackerServiceImpl implements TrackerService{
 
     @Override
     public ResponseEntity<Tracker> findTrackerByVehicle(String registrationnumber) {
+        @SuppressWarnings("null")
         Optional<Vehicle> optionaVehicle=vRepository.findById(registrationnumber);
         if (optionaVehicle.isPresent()) {
             Vehicle vehicle=optionaVehicle.get();

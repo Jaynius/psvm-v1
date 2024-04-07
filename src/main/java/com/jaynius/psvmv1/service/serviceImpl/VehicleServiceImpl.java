@@ -14,7 +14,6 @@ import com.jaynius.psvmv1.model.Vehicle;
 import com.jaynius.psvmv1.model.VehicleOwners;
 import com.jaynius.psvmv1.repository.VehicleOwnerRepository;
 import com.jaynius.psvmv1.repository.VehicleRepository;
-import com.jaynius.psvmv1.service.VehicleOwnerService;
 import com.jaynius.psvmv1.service.Vehicleservice;
 
 import lombok.AllArgsConstructor;

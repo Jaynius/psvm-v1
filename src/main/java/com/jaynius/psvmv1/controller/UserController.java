@@ -1,6 +1,7 @@
 package com.jaynius.psvmv1.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +31,7 @@ public class UserController {
         return service.findUserById(idnumber);
     }
     @GetMapping("/users/vehicle/{registrationNumber}")
-    public ResponseEntity<List<Users>> findUsersByVehicle(@PathVariable String registrationNumber){
+    public ResponseEntity<Set<Users>> findUsersByVehicle(@PathVariable String registrationNumber){
         return service.findUsersByVehicle(registrationNumber);
     }
     @PutMapping("/users/update/{idNumber}")

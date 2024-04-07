@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @NoArgsConstructor
@@ -17,9 +18,14 @@ import lombok.Setter;
 public class Driver {
     @Id
     private String idnumber;
-    private String name,contact,email;
+    private String name,contact,email, password;
 
     @OneToOne
     @JoinColumn(name="vehicle_Registration")
     private Vehicle vehicle;
+
+    public void setPassWord(String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
+    }
 }

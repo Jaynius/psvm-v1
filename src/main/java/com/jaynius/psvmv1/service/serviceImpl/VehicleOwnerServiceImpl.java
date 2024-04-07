@@ -32,6 +32,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
 
    
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<VehicleOwners> addOwner(VehicleOwners owner) {
     repository.save(owner);
@@ -40,6 +41,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
 
     @Override
     public ResponseEntity<VehicleOwners> findOwnersById(String idNumber) {
+        @SuppressWarnings("null")
         Optional<VehicleOwners> owner=repository.findById(idNumber);
         if (owner.isPresent()) {
             return new ResponseEntity<>(owner.get(),HttpStatus.FOUND);
@@ -51,6 +53,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
 
     @Override
     public ResponseEntity<VehicleOwners> updateOwnersById(VehicleOwners owner, String idNumber) {
+        @SuppressWarnings("null")
         Optional<VehicleOwners> existingOwner=repository.findById(idNumber);
         if (existingOwner.isPresent()) {
             VehicleOwners updatedOwner=existingOwner.get();
@@ -69,6 +72,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
 
     @Override
     public ResponseEntity<Set<VehicleOwners>> findOwnersByVehicleId(String registrationNumber) {
+        @SuppressWarnings("null")
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalVehicle.isPresent()) {
             Vehicle vehicle=optionalVehicle.get();
@@ -79,26 +83,39 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    
     @Override
-    public ResponseEntity<VehicleOwners> deleteOwnersById(String idNumber) {
-       Optional<VehicleOwners> owner=repository.findById(idNumber);
-       if (owner.isPresent()) {
-        repository.deleteById(idNumber);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public void deleteOwnersById(String idNumber) {
         
-       }
-       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       repository.deleteById(idNumber);
     }
 
+    
     @Override
-    public ResponseEntity<List<VehicleOwners>> findAllOwners() {
-       List<VehicleOwners> ownerList=new ArrayList<>();
-       repository.findAll().forEach(ownerList::add);
-       if (ownerList.isEmpty()) {
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public List<VehicleOwners>findAllOwners() {
+       return repository.findAll();
+    //    repository.findAll().forEach(ownerList::add);
+    //    if (ownerList.isEmpty()) {
+    //     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         
-       }
-       return new ResponseEntity<>(ownerList,HttpStatus.OK);
+    //    }
+    //    return new ResponseEntity<>(ownerList,HttpStatus.FOUND);
     }
+
+//     @Override
+// public ResponseEntity<List<VehicleOwners>> findAllOwners() {
+//     try {
+//         List<VehicleOwners> ownerList = repository.findAll();
+//         if (ownerList.isEmpty()) {
+//             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//         }
+//         return new ResponseEntity<>(ownerList, HttpStatus.FOUND);
+//     } catch (Exception e) {
+//         // Log the exception for debugging
+//         e.printStackTrace();
+//         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//     }
+// }
+
 
 }

@@ -1,16 +1,18 @@
 package com.jaynius.psvmv1.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,5 +39,8 @@ public class Inspection {
     @ManyToOne
     @JoinColumn(name = "vehicle_registration")
     private Vehicle vehicle;
+
+    @ManyToMany(mappedBy = "inspections" ,cascade = CascadeType.ALL)
+    private Set<Inspector> inspectors;
     
 }
