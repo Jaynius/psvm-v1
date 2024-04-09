@@ -9,22 +9,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jaynius.psvmv1.DTO.ConductorDTO;
 import com.jaynius.psvmv1.model.Conductor;
 import com.jaynius.psvmv1.service.ConductorService;
 
 
 @RestController
+@RequestMapping("v1/conductors")
 public class ConductorController {
     @Autowired
+
     private final ConductorService service;
 
     public ConductorController(ConductorService service) {
         this.service = service;
     }
-    @PostMapping("/conductors/add")
-    public ResponseEntity<Conductor> addConductors(@RequestBody Conductor conductor){
+    @PostMapping("/add")
+    public String addConductors(@RequestBody Conductor conductor){
         return service.addConductor(conductor);
     }
 

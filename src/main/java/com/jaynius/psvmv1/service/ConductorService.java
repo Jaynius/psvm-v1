@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.jaynius.psvmv1.DTO.ConductorDTO;
 import com.jaynius.psvmv1.model.Conductor;
 
 @Service
 public interface ConductorService {
-         ResponseEntity<Conductor> addConductor(Conductor conductor);
+         String addConductor(Conductor conductor);
          ResponseEntity<Conductor> findConductorById(String idNumber);
          ResponseEntity<Conductor> updateConductorById(String idNumber,Conductor conductor);
          ResponseEntity<Conductor> deleteConductorById(String idNumber);

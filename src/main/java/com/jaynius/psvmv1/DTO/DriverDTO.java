@@ -1,5 +1,7 @@
 package com.jaynius.psvmv1.DTO;
 
+import com.jaynius.psvmv1.model.Vehicle;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,4 +15,5 @@ public class DriverDTO {
 
     private String idnumber;
     private String name,contact,email, password;
+    private Vehicle vehicle;
 }

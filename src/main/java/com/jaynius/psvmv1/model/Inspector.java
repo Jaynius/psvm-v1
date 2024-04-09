@@ -3,8 +3,6 @@ package com.jaynius.psvmv1.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -32,10 +30,8 @@ public class Inspector {
     )
     private Set<Inspection> inspections=new HashSet<>();
 
-     public void setPassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(password);
+    
         
-    }
+    
 
 }

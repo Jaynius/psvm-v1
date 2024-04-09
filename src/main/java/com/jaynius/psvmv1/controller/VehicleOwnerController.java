@@ -10,19 +10,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jaynius.psvmv1.model.VehicleOwners;
 import com.jaynius.psvmv1.service.VehicleOwnerService;
 
 @RestController
+@RequestMapping("/v1/owners")
 public class VehicleOwnerController {
     private final VehicleOwnerService service;
 
     public VehicleOwnerController(VehicleOwnerService service) {
         this.service = service;
     }
-    @PostMapping("/owners/add")
+    @PostMapping("/add")
     public ResponseEntity<VehicleOwners> addOwner(@RequestBody VehicleOwners owner){
         return service.addOwner(owner);
     }

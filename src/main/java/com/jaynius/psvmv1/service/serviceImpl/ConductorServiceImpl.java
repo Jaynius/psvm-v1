@@ -7,8 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.jaynius.psvmv1.DTO.ConductorDTO;
 import com.jaynius.psvmv1.model.Conductor;
 import com.jaynius.psvmv1.model.Vehicle;
 import com.jaynius.psvmv1.repository.ConductorRepository;
@@ -25,13 +27,25 @@ public class ConductorServiceImpl implements ConductorService {
     private final ConductorRepository repository;
 
     @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
     private final VehicleRepository vRepository;
 
-    @SuppressWarnings("null")
+
     @Override
-    public ResponseEntity<Conductor> addConductor(Conductor conductor) {
-      repository.save(conductor);
-      return new ResponseEntity<>(HttpStatus.CREATED);
+   public  String  addConductor(Conductor conductor) {
+        repository.save(conductor);
+        return "Conductor added successfully";
+      // Conductor newcConductor=new Conductor();
+      //   newcConductor.setIdNumber(conductorDTO.getIdNumber());
+      //   newcConductor.setName(conductorDTO.getName());
+      //   newcConductor.setContacts(conductorDTO.getContacts()); 
+      //   newcConductor.setEmail(conductorDTO.getEmail());
+      //   newcConductor.setPassword(passwordEncoder.encode(conductorDTO.getPassword()));
+      //   repository.save(newcConductor);
+      //   return "Conductor added successfully";
+      
     }
 
     @Override

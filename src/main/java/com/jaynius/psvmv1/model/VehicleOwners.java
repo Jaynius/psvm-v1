@@ -33,9 +33,9 @@ public class VehicleOwners {
         inverseJoinColumns = {@JoinColumn(name="vehicle_registration")}
     )
     private Set<Vehicle> vehicle=new HashSet<>();
-     public void setPassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.password = encoder.encode(password);
-        
+
+    public void setPassword(String password){
+        this.password = new BCryptPasswordEncoder().encode(password);
     }
+
 }
