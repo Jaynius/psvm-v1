@@ -1,0 +1,284 @@
+\documentclass[a4paper, 12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage[margin=1.5in,top=1in,bottom=1in,right=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc} % Font encoding
+\usepackage{graphicx} % For including images
+
+
+ % 1.5 spacing
+\setlength{\parskip}{6pt plus 1pt minus 1pt} % Paragraph spacing
+% Custom title page
+\begin{document}
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.2\textwidth]{/home/bram/Documents/14824.png} % Replace mmu_logo.png with your university logo
+    \vspace{0.5cm}
+    
+    {\scshape\Large Multimedia University of Kenya \par}
+    \vspace{0.5cm}
+    {\scshape\Large Faculty of Computing \& Information Technology \par}
+    \vspace{1cm}
+    
+    {\huge\bfseries Public Service Vehicle Safety Management System\par}
+    \vspace{2cm}
+    
+    {\Large\itshape By\par}
+    \vspace{0.5cm}
+    {\Large BRAMWEL JUMA BARASA \par}
+    \vspace{0.3cm}
+    {\Large CIT-223-028/2021 \par}
+    \vspace{0.5cm}
+    {\Large Supervisor:MS YVETTE OTUKANA\par}
+    \vspace{2cm}
+
+    {\large \today\par}
+    \vspace{1cm}
+    
+
+    {\Large Submitted in partial fulfillment of the requirements of Third Year Bachelor of Science in \par}
+    {\Large Computer Science \par}
+    
+
+\end{titlepage}
+
+\pagenumbering{roman}
+% Start of the actual document
+\section{Declaration}
+% Your content here
+
+\noindent I hereby declare that this Project is my own work and has, to the best of my knowledge, not been submitted to any other institution of higher learning.
+
+\medskip
+
+\noindent \textbf{Student:} \underline{\hspace{5cm}\par}
+
+\noindent \textbf{Registration Number:} \underline{\hspace{5cm} \par}
+
+\noindent \textbf{Signature:} \underline{\hspace{5cm}} \hspace{1cm} 
+\noindent \textbf{Date:} \underline{\hspace{4cm}}
+
+\vspace{2cm}
+
+\noindent This project has been submitted as a partial fulfillment of requirements for the Bachelor of Science in Software Engineering of Multimedia University of Kenya with my approval as the University supervisor.
+
+\medskip
+
+\noindent \textbf{Supervisor:} \underline{\hspace{5cm}}
+
+\noindent \textbf{Signature:} \underline{\hspace{5cm}} \hspace{1cm} \textbf{Date:} \underline{\hspace{4cm}}
+
+\newpage
+
+\section{Dedication}
+\noindent My dearest parents,Mr Nalwa Enos and Mrs Wakoli Florence, Throughout my journey, your unwavering love, support, and encouragement have been the guiding stars lighting my path. Every milestone achieved and every success attained is a testament to your boundless sacrifices and endless belief in me.
+
+Mom and Dad, your selflessness knows no bounds. You've instilled in me the values of perseverance, determination, and resilience, shaping me into the person I am today. Your faith in my abilities has been my greatest source of strength, propelling me forward even in the face of adversity.
+
+As I dedicate this project to you, I want to express my deepest gratitude for your ceaseless devotion and for being my pillars of strength. Your love has been the driving force behind every endeavor, and it is with immense pride and joy that I share this achievement with you.
+
+This project is not just a culmination of my efforts but also a reflection of your endless love and support. Thank you for being my inspiration, my motivation, and my greatest cheerleaders. I am forever grateful for the love and guidance you've bestowed upon me.
+
+With all my love and appreciation,
+\clearpage
+
+\section{Acknowledgements}
+\clearpage
+
+\section{Abstract}
+\begin{itemize}
+\item The main aim of this project is to create a system that keeps records of
+public service vehicle (PSV) realtime statistics such as speed and location
+,insurance policy and all the safety features of the vehicle which are used in
+determining the safety level of a particular PSV.
+\item The main users of the system are the passengers and the law enforcement.
+Other key players in the system are drivers, conductors,vehicle owners, saccos and NTSA. Passengers enter the vehicles registration number before
+boarding to check the safety level of the vehicle and they can make mindful
+decisions based on the data that the system provides.
+
+\item Drivers, conductors and vehicle owners provide details that are linked to
+the repective vehicle(s)while the NTSA provides inspection reports of the
+vehicles. The system uses gps devices to get realtime location and speed
+of vehicles which is recorded and analysed and safety levels of a vehicle are
+determined.
+\item The system allows police officers to view the vehicles safety level and inspection report by entering the vehicles registration number and take apropriate
+actions.
+\item This system is built using React js and java.
+\end{itemize}
+\clearpage
+
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+
+\pagenumbering{arabic}
+\chapter{Introduction}
+\section{Background of study}
+\noindent Public Transport plays a crucial role in the daily life of Kenyan citizens. The country relies majorly on public service vehicles (PSVs) to meet the commuter needs of
+diverse groups of people. This has led to an increase in passengers which in turn
+led to the necessity of increased motorization. Public transport in the country is
+driven by privately-owned vehicles, public service vehicles (PSV) popularly known
+as matatu, operating in the country following licensing through various licensing
+bodies. At present, a PSV is any vehicle that is licensed to ferry the public on
+Kenyan roads. This includes buses, mini-buses, vans, and mini-vans, 3-wheel motorcycles, motorcycles, taxis among others. The most popular category of PSV
+vehicles is the vans and mini-buses.\par
+\noindent Traditionally, Monitoring of safety of the PSVs is done by a serioes of manned
+rodblocks on the roads and occassional inspection by the NTSA. This system has
+been faced with loopholes which range from bribes and direct evation of roadblocks. This hs led to reckless driving and unroadworthy vehicles on the roads
+resulting to increased road accidents which have claimed lives of many passengers
+
+\section{Problem Statement}
+\noindent Road regulation enforcement is a difficult task considering the vast number of
+motorists contrasted with the low numbers of law enforcement officerscers. As such,
+a great deal of cooperation between road users, policymakers, road designers, and
+law enforcement is needed. The current approach to road traffic and safety places
+all responsibility on the road user as opposed to an integrated view as witnessed
+through initiatives like Zusha\par
+\noindent Police crackdowns on non-conforming drivers is a solution that causes more inconvenience to passengers than they do to those who disobey traffc laws. As noted
+PSV drivers frequently allege that they are subjected to abuse and/or harassment
+by the police for no other reason than to demand a bribe. Static checkpoint systems, the nation's primary monitoring technique, are another flaw in police. The
+drivers alert other drivers to impending checks by communicating with them or by previously being aware of the monitored zones. In this sense, it is challenging
+to measure irresponsible driving outside of the monitored zone.\par 
+\noindent Apart from insecurity, the majority of PSVs have placed very little emphasis on
+the comfort of their passengers, with behaviors ranging from vagrant insults to
+cramming people into small spaces without following rules. This hostility and
+unwillingness of the PSV crew to listen to passenger demands has led to an impediment of campaigns such as the zusha campaign.
+
+\section{Aim of Study}
+\noindent The aim of this study is to develop an online system that monitors realtime data
+from PSVs and determing the safety levels of the vehicle with a goal to increase the
+safety of the most vulnerable i.e the passengers and reduce road traffic accidents.
+
+\subsection{Research Objectives}
+\noindent
+\begin{enumerate}
+\item To design an online system that moniters public service vehicles.
+\item To Create an avenue for determining vehicle safety by passengers and the
+law enforcement
+\item Provide a platform that allows passengers to protest against recklessly driven
+vehicles.
+\item To develop a database that stores vehicle's safety details and drivinh history
+\end{enumerate}
+
+\section{Significance of the Study}
+\noindent Passenger safety and overall motorist safety has been a major challenge as evidenced by a large number RTAs .This study aims at providing a system that
+monitors the PSVs and provides information about specifc PSV to passengers.\par
+Furthermore, this study aims at providing law inforcment with information of
+recklessly driven vehicles outside of the monitored zones.\par
+The study will be crucial in creating a connection between passengers the PSV
+crew and the law enforcement.\par
+Ultimately, the signifficance of this study lies in its potential to catalyze positive
+change improving enforcement strategies, and promoting a culture of responsible road behavior, the study has the potential to save lives, reduce injuries, and
+contribute to the overall well-being and prosperity of the Kenyan population.
+
+\section{scope}
+Every project is done to achieve a set of goals with some conditions keeping in
+mind that it should be easy to use, feasible, and user-friendly. As the goal of
+this project is to develop an online PSV monitoring system ,this system will be
+designed keeping in mind the conditions (easy to use, feasible, and user-friendly)
+stated above.This is made possible through the use of a GeoLogger GPS data
+
+logger which records time-stamped records for latitude and longitude, the vehicle's
+speed, and the vehicle's heading. The GeoLogger has several features that made
+it desirable for this study. The device is powered by the vehicle's DC power
+system via the cigarette lighter or power outlet so that it operates only when the
+vehicle is turned on. It will help in determining the safety level of the PSVs and
+providing the information to the passengers and more detailed information to the
+law enforcement. This project aims to monitor PSVs beyond the monitered zones
+that are under speed-guns and roadblocks\par 
+\noindent The main scope and deliverable of the project would be to:
+\begin{itemize}
+\item Understand and prepare detailed requirement and specifications
+\item Prepare high level and detailed design specifcations for the system
+\item Prepare Test Plan and test cases
+\item Devlop the System and coding.
+\item Perfom unit Test
+
+\end{itemize}
+
+\section{Assumptions}
+\begin{itemize}
+\item \textbf{Acces:}It is assumed that passengers,drivers,conductors and law enforcement own a smartphone that will be used to access the system
+
+\item \textbf{Data Collection: }: It is assumed every PSV has the capacity to be fitted
+with gps trackers
+\item \textbf{Connectivity: }: The study assumes that users of the system have internet
+connection.
+\item \textbf{Enforcement effectiveness:} : It is assumed that improving road monitoring techniques, the system will lead to a reduction in RTAs and improved
+road safety outcomes.
+\end{itemize}
+
+\section{Limitations and Countermeasures}
+\noindent The study is subject to several limitations and challenges that may affect the reliability and generalizability of its findings. One such limitation pertains to the
+reliance on existing data sources, such as government reports and police records,
+which may suffer from inaccuracies, underreporting, or inconsistencies. To mitigate this limitation, the study will use APIs provided by the NTSA website mantain consistency in data being fed to the system\par
+\noindent Another challenge involves the potential for drivers and PSV crew to switch off
+or disconnect the gps trackers from the vehicles. To mitigate this, the systems
+employs the use of an OBD logger which provides separate data files for each
+key-on to key-off vehicle operating period. It also provides the start time for
+each operating period and the elapsed time between each record in an operating
+period.This data will be frequently monitered to maximize uptime and minimize downtime
+
+\chapter{Literature Review}
+\section{Background}
+\noindent Speeding and reckless driving pose significant threats to road safety, leading to
+a concerning number of accidents, injuries, and fatalities worldwide. In Kenya,
+like many other countries, public service vehicles (PSVs) are often at the forefront
+of these road safety challenges. The operation of PSVs in Kenya is a critical
+component of the country's transportation system, providing essential services to
+millions of commuters daily. However, the prevalence of speeding and reckless
+driving among PSV operators has contributed to a worrying trend of road traffic
+accidents, endangering the lives of passengers, pedestrians, and other road users.
+This literature review aims to explore the various systems implemented to curb
+accidents caused by speeding and reckless driving in PSVs operating in Kenya.
+By examining existing research, policies, and interventions, this review seeks to
+identify effective strategies and best practices which will be implemented by the
+system for improving commuter safety in the Kenyan context
+
+\section{Related Systems}
+\noindent Various sustems have been developed to streamline services in the road transport sector and morever the public transport sector. These systems are Traditional police crackdown through manned roadblocks across the country,use of speedguns ,frequent vehicle inspection by the NTSA and the fleet management systems that are used to manage Vehicles owned by a particular systems.\par
+\noindent Fleet management systems hepls in monitoring fuel consumption, maintenance schedules, and vehicle position and condition all contribute to cost control, equipment longevity, and a decrease in fatalities. It aids businesses in ensuring compliance, enhancing productivity, and lowering accidents. Applications for fleet management provide drivers more control over their cars.Fleet management services are less expensive than post-accident management organizations. For further advantages, we advise utilizing fleet management applications to measure all accident-related effects.However this systems focus majorly on the businss streamline without focusing on the safety of commuters \par
+\noindent Police crackdown through manned roadblocks across the country was meant to
+provide an avenue for the law enforcemnt to track down reckless drivers and unroadworthy vehicles . However this method has been filled with countless flaws
+from harrasment by the police officers to outright bribery which has led to the
+ineffeciency of this system. Moreover the matatu crew alert each other of a roadbloack or about a speed gun zone which leads to the difficulty in tracking down
+reckless driving out of monitered zones.\par 
+\noindent Introduction of campaigns such as the Zusha campaign has signifficantly hepled in
+reucing reckless driving in PSVs.This campaign give the commuters the voice to
+protest against recklessly driven vehicles. It is promoted by the use of mandatory
+stickers on the PSVs
+
+\section{Limitations of these systems}
+\noindent This systems have greatly improved the safety of commuters and reduction of road
+accidents greatly.However, they are greatly flawed as follows:
+\begin{itemize}
+\item Motorist familiarity with monitored zones and roadblock zones which hinders
+the monitering of reckless driving in unmonitored zones.
+\item Police bribery and harrasment of matatu crew due to lack of a defined system
+that clearly shows reckless driven
+\item Campaigns such as zusha have been rendered ineffecient due to hostility of the matatu crews who fail to loisten to commuter protest when the vehickes are being recklessly driven
+\item Ineffecient storage of vehicle inspection reports which has led to an increase
+in the number of unroadworthy public service vehicles
+
+\end{itemize}
+\section{Proposed solution}
+
+\noindent The public service vehicle safety management system provides a solution to the shortcomings of the traditional system by:
+\begin{itemize}
+\item The system collects realtime data such as speed, heading, longitude and
+lattitudes and timestamps them for anaysis.This is made possible by the use
+of GPS trackers and Geologger.
+\item The system keeps track of vehicle safety inspections reports, Vehicle crew
+details , insurance details, vehicle details and a vehicles calculated and analysed speeding history which are used to detrmine the safety level of the
+vehicle.
+\item This system allow commuters to view the details , vehicle data and speeding
+history of the vehicle to determine the safety level of the system and make
+mindful decisions.
+\item 
+\end{itemize}
+
+
+
+\end{document}
