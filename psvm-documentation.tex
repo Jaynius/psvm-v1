@@ -105,12 +105,14 @@ of vehicles which is recorded and analysed and safety levels of a vehicle are
 determined.
 \item The system allows police officers to view the vehicles safety level and inspection report by entering the vehicles registration number and take apropriate
 actions.
-\item This system is built using React js and java.
+\item This system is built using Reactjs  java and springboot.
 \end{itemize}
 \clearpage
-
-\tableofcontents
 \thispagestyle{empty}
+\tableofcontents
+\clearpage
+\thispagestyle{empty}
+\listoffigures
 \clearpage
 
 \pagenumbering{arabic}
@@ -278,6 +280,509 @@ history of the vehicle to determine the safety level of the system and make
 mindful decisions.
 \item 
 \end{itemize}
+\chapter{Methodology}
+\section{Introduction}
+\noindent The Systems Development Life Cycle (SDLC) is a framework for describing the phases involved
+in developing and maintaining information systems.\par 
+\noindent \textbf{Predictive life cycle} in which the scope of the project can clearly be articulated and the schedule
+and cost can be predicted; and \textbf{ Adaptive Software Development} (ASD) life cycle in which
+requirements cannot be clearly expressed, projects are mission driven and component based,
+using time-based cycles to meet target dates \par 
+\noindent We are going to use an ASD life cycle model called Agile System Development Methodology
+for developing PSVSM system.
+
+\section{Agile System Development Methodology}
+\noindent Most agile methods attempt to minimize risk by developing software in short time boxes called
+Iterations. Software development being essentially a human activity will always have variations
+in processes and inputs and the model should be flexible enough to handle the variations. The
+following are the characteristics of agile model that makes it suitable for PSVSM system development
+\begin{itemize}
+\item Iterative with short cycles enabling fast verifications and corrections.
+\item Time bound iterative cycles.
+\item Modularity at development process level.
+\item People oriented.
+\item Collaborative and communicative working style.
+\item Incremental and convergent approach that minimizes risks and facilitates functional additionals
+\end{itemize}
+\section{Overview}
+\noindent The scrum method is incremental, with each increment called a sprint, each sprint is
+recommended to last for 4 weeks. Before the sprint there is a planning meeting for each sprint,
+where a customer decides which features should be implemented in the upcoming sprint. During
+the sprints the teams meets on a daily basis on short meetings called scrum. A sprint review
+meeting is held at the end of each sprint, and the customer is able to see the existing
+accomplishments for the preceding sprint. Teams can also hold sprint retrospective meetings to,
+where they can look at the process and then try to find out what went right and what can be
+improved. The figure bellow shows the flow of the methods
+
+\begin{figure}[h]
+\centering
+  \includegraphics[width=0.5\textwidth]{/home/bram/Documents/psvm-v1/Scrum_Agile_events.png}
+  \caption{Agile model (Shwaber K ,2003)}
+  \label{fig:agile model}
+\end{figure}
+
+\section{Scrum artifacts}
+\noindent Scrum being an agile method, follows that the formality of the project is as low as possible, it
+thus facilitated necessary changes to be made to the project. The customer is also able to see the
+project progress since this improves their motivation and involvement. Artifacts of scrum
+includes:
+\begin{itemize}
+\item The product backlog
+\item The sprint backlog
+\item The sprint burndown chart.
+\item The impediment lists
+
+\end{itemize}
+\subsection{The Product Backlog} 
+It can be considered equivalent to the requirement specifications, but it has one big difference in
+that it does not entail long description of each requirement, it has only single sentence
+description for each requirement. Being a list of such single sentence requirements, it is thus the
+customer’s priority to keep it prioritized and updated. The customer can add requirements to the
+list and the team is then responsible for providing estimates of how long the implementation
+might take.
+
+\subsection{The Sprint Backlog} 
+It is a list of tasks maintained and compiled by the team based on he the items in the product
+backlog, initially selected to be part of the sprint. The list is similar to the product backlog, but
+with a big difference. The items on the product backlog are features requested by the user, the
+sprint backlog is a list of tasks the developers must do to implement the items that the customer
+chose from the product backlog. The customer does not need to know about the items on the
+sprint backlog.
+A general rule of thumb is that the tasks on the sprint backlog should always be relatively short,
+that is between one hour and two days.
+\subsection{The Sprint Burn down Chart} 
+This measures the progress of the sprint instead of the project. It is important because it helps the
+team discover tasks they did not consider but that must be added to the sprint backlog. Since the
+chart displays the amount of work remaining and not the amount of work completed, the graph
+can in fact increase from one day to the next.
+\subsection{Impediment list} 
+An impediment is anything holding back development in some way or another. It is the scrum
+master’s responsibility to deal with any such impediments. The list is simply a set of tasks that
+the scrum master uses to track the impediments that needs to be solved.
+\subsection{The Sprint Planning Meeting} 
+In the first session, the Customer chooses high priority items from the product backlog that
+should be completed in the upcoming Sprint. The customer explains the items to the team and
+they give an estimate on how long it will take to complete it. The sprint backlog is filled so that
+the sum of the item estimates is about the same as the available work time of the team during the
+upcoming sprint.
+\subsection{The Daily Activities} 
+During the sprint, the developers work on the items in the sprint backlog. Every day the
+developers synchronize their progress in a daily Scrum meeting that should last no longer than
+15 minutes. During the meeting, all the developers will tell the others what they did since the last
+Scrum, if there are any impediments obstructing their work and what they are planning on doing
+until the next Scrum. Another important day-to-day activity is updating the sprint backlog and
+burn down chart.
+\subsection{Sprint Review Meeting} 
+At the end of the sprint, the team meets with the customer and presents the result of the sprint.
+The users demonstrate the functionality they have completed and gets feedback from the
+customer. If the demonstrated functionality is what the customer wanted, then this gives the team
+a feeling of accomplishment as well as the customer a proof that the project is moving in the
+right direction. If the demonstrated functionality is not quite what the customer was looking for it
+is now easy to explain how it is different and what should be done next. In some cases, it is
+enough to make a few changes while in other cases the implemented functionality must be
+discarded.
+
+\subsection{Sprint Retrospect Meeting} 
+The intention of this meeting is to help the team improve their development process. The team,
+the scrum master and the customer (optional) attend the meeting. During the meeting, the team
+members take turns saying what went well during the last sprint, and what could be improved.
+After all team members have had their say, they prioritize the possible improvements and discuss
+them in order. The meeting should not last more than 3 hours.
+\subsection{Project Startup} 
+Ken Schwaber has had much success with his kick starting of Scrum projects as described in the
+book Agile Project Management with Scrum (Schwaber, 2002). This process goes as follows.
+The Scrum Master works with the customer and prepares a backlog. Then the Scrum Master, the
+Customer and the Team uses one day to go over this backlog. During this first day the customer
+explains the items in the backlog to the team, and the team estimates how much work it would
+take to implement this. The customer then prioritizes the items in the backlog and divides the
+backlog items into sprints. The following day is the first day of the first sprint. This first sprint
+isn’t very different from the following sprints, except that the first part of the sprint planning
+meeting has already been completed.
+\section{Advantages of Agile} 
+i. Customer satisfaction
+ii. Allows changes to be made.
+iii. Deliver a working software frequently, ranging from a few weeks to a few months,
+considering shorter time-scale.
+iv. Promotes collaboration
+v. Provides motivation between individual team members.
+vi. Allows face-to-face Conversation
+vii. Measure the Progress as per the Working Software.
+viii. Maintain Constant Pace
+ix. Monitoring - Pay regular attention to technical excellence and good design to enhance
+agility.
+x. Simplicity - Keep things simple and use simple terms to measure the work that is not
+completed.
+xi. Review the Work Regularly
+\section{Disadvantages of Agile} 
+i. Limited support for distributed development environments.
+ii. Limited support for subcontracting.
+iii. Limited support for developing large, complex software.
+iv. Limited support for development involving large teams.
+
+\chapter{System Analysis}
+\section{Introduction}
+Upon the completion of the Public service Vehicle Safety Managenemt System, there are a number of
+things that will be expected of it not only by the prospected users, but also for the administrator
+of the system. These will therefore form the requirements of the Public service Vehicle Safety Managenemt System and will be broadly classified in to the system requirements, functional
+requirements and the Non-functional requirements.
+
+\section{ System Requirements}
+\subsection{Software Requirements Specification}
+A set of programs associated with the operation of a computer is called software. Software is the
+part of the computer system, which enables the user to interact with several physical hardware
+devices.\par 
+The minimum software requirement specifications for developing this project are as follows:
+\begin{itemize}
+\item \textbf{Operating system: }windows,linux
+\item \textbf{Presentation:}Reactjs, Axios, bootstrap ,apache tomcat, google maps API,browser, java 17
+\item \textbf{Database:} mariadb
+\item \textbf{documentation: }LaTex
+
+\end{itemize}
+\subsection{Hardware Requirements Specification}
+The collection of internal electronic circuits and external physical devices used in building a
+computer is called the Hardware. The minimum hardware requirement specifications for
+developing this project are as follows:
+\begin{itemize}
+\item \textbf{ Processor:} Standard processor with a speed of 1.6 GHz or more
+\item \textbf{RAM:}  256 MB RAM or more
+\item \textbf{Hard Disk:}  20 GB or more
+\item \textbf{Monitor:}  Standard color monitor
+\item \textbf{Keyboard:}  Standard keyboard
+\item \textbf{Mouse:} Standard mouse
+\end{itemize}
+
+\section{Functional Requirements}
+\begin{enumerate}
+\item Security; to ensure confidentiality, integrity and availability
+\item Administrative functions
+\item Authentication
+\item Authorization levels
+\item External interfaces
+\item Historical data
+\item Legal and regulatory requirement
+\item Transaction corrections, adjustments and cancellations
+\end{enumerate}
+
+\section{Non Functional Requirements}
+\subsection{Reliability Requirements}
+The system must perform request accurately for reliability. For example, when the
+vehicle owner saves the edited details of the vehicle , after he reviews the details later, they must be
+changed according to the latest details that was updated. Moreover, the client is not allowed to
+view the details that the administrator has. Besides that, the login form will have validity check
+to ensure that only the authorized users gain access to the system.
+\subsection{Usability Requirements}
+This system should be user-friendly and easy to use so that users can perform their tasks easily.
+\subsection{Implementation Requirements}
+In the implementation of this system, we use React Js which is the frontend.\par 
+The backend which hold the bussiness logic of the application is built using Java with springboot framework. Data from the bussiness logic is stored in Mariadb.The frontend and backend are linked using Axios.
+
+\section{Technologies Used}
+\subsection{MariaDB}
+\noindent We started out with the intention of using the Mariadb database system to connect to our tables
+using our own fast low-level routines. This resulted in a new SQL interface to our database but
+with almost the same API interface as Mariadb.
+The following list describes some of the important characteristics of the mariadb Database
+Software that made us prefer it for PSVSM system to other databases.\par 
+\indent \textbf{features}
+\begin{enumerate}
+  \item \textbf{High Performance}: MariaDB often exhibits better performance than its counterparts due to its advanced optimization techniques and storage engines like Aria and InnoDB.
+  
+  \item \textbf{Open Source}: Being open source, MariaDB is free to use and has a large community contributing to its development and support.
+  
+  \item \textbf{Compatibility}: MariaDB is designed as a drop-in replacement for MySQL, making it easy to switch from MySQL to MariaDB without significant changes to applications or databases.
+  
+  \item \textbf{Advanced Features}: MariaDB offers many advanced features like JSON support, temporal data tables, and dynamic columns, enhancing its functionality for modern database needs.
+  
+  \item \textbf{Security Enhancements}: MariaDB provides enhanced security features such as roles-based access control, encryption at rest and in transit, and plugin authentication for improved data protection.
+\end{enumerate}
+
+\subsection{Springboot}
+\noindent Springboot is the main framework that I used to create the backend. It provides out of the box features that make development of APIs faster. Here are some features that made it a prefered solution for this project:
+\begin{enumerate}
+  \item \textbf{Rapid Development}: Spring Boot provides a set of pre-configured components and conventions that allow developers to quickly set up and start developing applications without dealing with boilerplate configuration.
+  
+  \item \textbf{Microservices Architecture Support}: Spring Boot is well-suited for building microservices-based architectures, providing features like embedded servers, dependency management, and configuration.
+  
+  \item \textbf{Auto-configuration}: Spring Boot automatically configures many components based on classpath dependencies, reducing the need for manual configuration.
+  
+  \item \textbf{Embedded Servers}: Spring Boot allows embedding servlet containers like Tomcat, Jetty, or Undertow directly within the application, simplifying deployment and reducing overhead.
+  
+  \item \textbf{Production-Ready}: Spring Boot offers production-ready features such as health checks, metrics, and externalized configuration, facilitating the deployment and management of applications in production environments.
+\end{enumerate}
+
+howevermuch springboot maybe good for development, it has its own challenges which are listed below \par 
+\begin{enumerate}
+  \item \textbf{Steep Learning Curve}: Spring Boot's extensive features and configurations can lead to a steep learning curve for beginners.
+  
+  \item \textbf{Complexity}: While Spring Boot simplifies the setup of Spring applications, it can still introduce complexity, especially in larger projects where understanding the underlying configurations becomes necessary.
+  
+  \item \textbf{Overhead}: Spring Boot's auto-configuration feature may lead to unnecessary overhead, especially in smaller projects where simpler frameworks could suffice.
+  
+  \item \textbf{Magic Behind Auto-Configuration}: Although Spring Boot's auto-configuration is convenient, it might be challenging to debug issues or understand the underlying configuration decisions made by the framework.
+  
+  \item \textbf{Limited Flexibility}: While Spring Boot offers a wide range of features, its opinionated approach might limit flexibility for developers who prefer more control over their application's configuration.
+\end{enumerate}
+
+\chapter{System Design}
+\section{Architectural Design} 
+PSVSM system uses three-tier architecture. Three-tier architecture is a client-server architecture
+in which the functional process logic, data access, computer data storage and user interface are
+developed and maintained as independent modules on separate platforms. Three-tier architecture
+is a software design pattern and well-established software architecture
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.3\textwidth]{/home/bram/Documents/psvm-v1/architecture-diagram.drawio.png} % Replace 'example-image' with your image file name
+  \caption{PSVSM client serve architecture} % Caption for the figure
+  \label{fig:psvsm structure} % Label for cross-referencing
+\end{figure}
+\section{logic design}
+\subsection{Behavioural Description}
+\textbf{Dataflow}
+
+
+\textbf{Context Level DFD}\par
+\noindent In the Context Level, the whole system is shown as a single process.
+Figure below illustrates PSVSM context level DFD showing Inputs to the overall system and
+outputs from the overall system shown together with their destinations.
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.8\textwidth]{/home/bram/Documents/psvm-v1/psvsms-context-diagram.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Context Level DFD} % Caption for the figure
+  \label{fig:context level DFD} % Label for cross-referencing
+\end{figure}
+
+\textbf {Top-Level DFD} \par
+\noindent The Top Level DFD gives the overview of the whole system identifying the major system
+processes and data flow. Figure below shows PSVSM system Top level DFD illustrating what the
+system does in more detail.
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/Top-level-DFD.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Top Level DFD} % Caption for the figure
+  \label{fig:Top level DFD} % Label for cross-referencing
+\end{figure}
+
+\subsection{UseCase documentation}
+\noindent The use case diagram show the relationship between actors and entities in the system. The diagram below shows the general use case of users, drivers, conductors and vehicle owners
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/UserUsecase.drawio.png} % Replace 'example-image' with your image file name
+  \caption{General Usecase diagram} % Caption for the figure
+  \label{fig:General usecase diagram} % Label for cross-referencing
+\end{figure}
+\par
+\textbf{vehicle owner usecase diagram}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/owners.usecase.png} % Replace 'example-image' with your image file name
+  \caption{Owners Usecase diagram} % Caption for the figure
+  \label{fig:vehicle owners usecase diagram} % Label for cross-referencing
+\end{figure}
+\par 
+\textbf{\underline{Commuters Usecase diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/users-commuter-usecase.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Commuters Usecase diagram} % Caption for the figure
+  \label{fig:Comuters usecase diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\textbf{\underline{Inspectors use case diagram}}\par
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/users-commuter-usecase.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Inspector Usecase diagram} % Caption for the figure
+  \label{fig:Inspector usecase diagram} % Label for cross-referencing
+\end{figure}
+\subsection{Class diagram Documentation}
+\noindent Creating documentation for a class diagram involves explaining the purpose of each class, its attributes, methods, relationships with other classes, and any additional information necessary for understanding the design. Here's a comprehensive overview of the PSVSMs  class diagram:
+\par
+\textbf{\underline{Class diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/psvms-system-class.drawio.png} % Replace 'example-image' with your image file name
+  \caption{System class diagram} % Caption for the figure
+  \label{fig:Class diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\section{Database Design}
+\noindent Entity-Relationship Diagram (ERD) is a type of database design tool used to visually represent the logical structure of a database.
+An ERD consists of entities, attributes, and relationships. Entities represent real-world objects or concepts  that are stored in the database. Attributes are the properties or characteristics of entities . Relationships describe how entities are related to each other.\par
+\textbf{\underline{Entity Relationship Diagram}}
+\par
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/psvsm-erd.drawio.png} % Replace 'example-image' with your image file name
+  \caption{entity relationship diagram} % Caption for the figure
+  \label{fig:ERD} % Label for cross-referencing
+\end{figure}
+\clearpage
+\section{User Interface Design}
+\noindent User Interface (UI) design is the process of creating interfaces in software or computerized devices with a focus on looks or style. It encompasses everything users interact with on a screen, including images, sliders, buttons, text, input fields, and all interactive elements. Here's a comprehensive overview of the UI design process\par
+\textbf{\underline{home UI design}}\par 
+\par
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/UI design.png} % Replace 'example-image' with your image file name
+  \caption{User Interface Design} % Caption for the figure
+  \label{fig:UI design} % Label for cross-referencing
+\end{figure}
+\chapter{Implementation and Testing}
+\section{Development environment}
+\subsection{Technologies Used}
+\begin{itemize}
+  \item \textbf{Java}: Java is used for backend development due to its robustness, platform independence, and extensive libraries and frameworks support.
+  \item \textbf{Spring Boot}: Spring Boot is chosen as the backend framework for its rapid development capabilities, dependency management, and support for building microservices.
+  \item \textbf{React.js}: React.js is employed for frontend development to create dynamic and interactive user interfaces with its component-based architecture and virtual DOM.
+  \item \textbf{Axios}: Axios is used as the HTTP client for making asynchronous HTTP requests from the frontend to the backend API implemented in Spring Boot.
+  \item \textbf{MariaDB}: MariaDB is selected as the relational database management system for its compatibility with MySQL, performance optimizations, and open-source nature.
+\end{itemize}
+\subsection{Backend Development}
+\begin{itemize}
+  \item \textbf{IDE}: IntelliJ IDEA is used as the Integrated Development Environment (IDE) for Java development, providing features such as code completion, refactoring, and debugging.
+  \item \textbf{Build Tool}: Apache Maven is utilized as the build automation tool for managing dependencies, compiling code, and packaging the application.
+  \item \textbf{Spring Boot Starter}: The project is initialized using Spring Initializr to bootstrap a Spring Boot application with necessary dependencies like Spring Web, Spring Data JPA, and MariaDB Driver.
+  \item \textbf{Database Setup}: MariaDB is installed and configured locally for development purposes. Database schema and tables are created using SQL scripts or Hibernate ORM entities.
+  \item \textbf{Backend Server}: Spring Boot's embedded Tomcat server is used for running the backend application locally during development.
+\end{itemize}
+\subsection{Frontend Development}
+\begin{itemize}
+  \item \textbf{Node.js and npm}: Node.js and npm (Node Package Manager) are installed to manage frontend dependencies and run development scripts.
+  \item \textbf{Create React App}: Create React App is used to scaffold a new React.js project with a predefined directory structure, webpack configuration, and development server setup.
+  \item \textbf{React Components}: UI components are developed using React.js, following best practices such as functional components, hooks, and component composition.
+  \item \textbf{State Management}: React's built-in state management capabilities are utilized for managing component state, and if needed, Redux or Context API can be integrated for global state management.
+  \item \textbf{Styling}: CSS modules, SASS, or styled-components are employed for styling React components, providing modularity and scoped styles.
+  \item \textbf{Development Server}: The frontend application is served locally using the webpack development server, enabling hot reloading and rapid iteration during development.
+\end{itemize}
+\subsection{Collaboration and Version Control}
+\begin{itemize}
+  \item \textbf{Version Control}: Git is used for version control, allowing collaboration among team members, tracking changes, and managing codebase versions.
+  \item \textbf{Git Hosting Platform}: GitHub, GitLab, or Bitbucket are utilized as the hosting platforms for the Git repositories, providing features like pull requests, code reviews, and issue tracking.
+  \item \textbf{Agile Methodology}: Agile development methodologies such as Scrum or Kanban are adopted for project management, enabling iterative development, frequent releases, and responsiveness to changing requirements.
+  \item \textbf{Communication Tools}: Communication tools like Slack, Microsoft Teams, or Discord are used for real-time communication, collaboration, and coordination among team members.
+\end{itemize}
+\subsection{Testing and Quality Assurance}
+\begin{itemize}
+  \item \textbf{Unit Testing}: JUnit and Mockito are employed for writing unit tests for backend Java code, ensuring code reliability and facilitating automated testing.
+  \item \textbf{Integration Testing}: Integration tests are conducted to verify the interaction between different components of the system, including frontend components, backend API endpoints, and database operations.
+ 
+\end{itemize}
+\section{Tesing}
+\noindent Testing is defined as the process in which defects are identified, isolated, subjected for
+rectification and ensured that product is defect free in order to produce the quality product and
+hence customer satisfaction.
+\subsection{Testing Methodology}
+White box Testing: is the testing process in which tester can perform testing on an application
+with having internal structural knowledge. Usually The Developers are involved in white box
+testing. We as the developers of SCMMS applied white box testing as our testing methodology.
+
+\subsection{STLC (Software Testing Life Cycle)}
+
+\subsubsection*{Test Planning}
+\begin{itemize}
+    \item While planning for testing of SCMMS system, we identified objectives of the test, areas that needed to be tested, areas that were not to be tested, and Scheduling Resource Planning.
+\end{itemize}
+
+\subsubsection{Test Development}
+\begin{itemize}
+    \item In the test development, we prepared a checklist (Test case Development) and the description of the test cases (Test Procedure preparation).
+\end{itemize}
+
+\subsubsection{Test Execution}
+\begin{itemize}
+    \item Test execution phase of SCMMS involved implementation of test cases and observing the result of the test.
+\end{itemize}
+
+\subsubsection{Result Analysis}
+\begin{itemize}
+    \item Result analysis of testing SCMMS system contained Expected value: behavior of the system and Actual value: actual behavior of the system.
+\end{itemize}
+
+\subsubsection{Bug Tracing}
+\begin{itemize}
+    \item We collected all the failed cases and prepared related documents.
+\end{itemize}
+
+\subsubsection{Reporting}
+\begin{itemize}
+    \item The results of the test.
+\end{itemize}
+\subsection{Types of Testing}
+
+\subsubsection{Smoke Testing}
+\begin{itemize}
+    \item We performed an initial test on SCMMS system for the availability of all the functionalities.
+\end{itemize}
+
+\subsubsection{Sanity Testing}
+\begin{itemize}
+    \item We then conducted an initial test on the system to check for the proper behavior of an application.
+\end{itemize}
+
+\subsubsection{Regression Testing}
+\begin{itemize}
+    \item During the project, we carried out several tests on functionalities that we tested before whenever we made a change to the existing functionality.
+\end{itemize}
+
+\subsubsection*{Adhoc Testing}
+\begin{itemize}
+    \item We performed an Adhoc test (positive and negative) to perform GUI testing.
+\end{itemize}
+\section{TCD (Test Case Document)}
+
+\subsection{Test Scope}
+This involved the areas of the system to be tested including homepage, fund seeker dashboard and projects dashboard.
+
+\subsection{Test Scenario}
+Our test scenario for the system included when the fund seeker fills in the application form, upload documents and hit the quit button.
+
+\subsection{Test Procedure}
+Positive testing, Negative testing using the corresponding GUI test cases, helped us in performing adhoc testing.
+
+\section{Test Cases}
+
+\subsection{Positive Test Cases}
+The positive flow of the functionality was considered, valid inputs were used for testing and expected value was positive to verify whether the requirements are justified. Table 1 below shows SCMMS positive test case.
+\begin{center}
+\begin{tabular}{|c|p{3cm}|c|c|c|}
+\hline
+Test Case Number & Description & Expected Value & Actual Value & Result \\
+\hline
+1 & check for all features in the screen& must contain all the features & pass & Pass \\
+2 & Enter valid Username and Password& It should accept & Pass & Pass \\
+
+\hline
+\end{tabular}
+\end{center}
+\par
+\clearpage
+\subsection{Negative Test Case}
+\noindent Must have negative perception and invalid inputs must be used for test.
+Table  below describes PSVSMs negative test case\par
+\begin{center}
+\begin{tabular}{|c|p{3cm}|c|c|c|}
+\hline
+Test Case Number & Description & Expected Value & Actual Value & Result \\
+\hline
+1 & Try to modify vehicle& should not allow & pass & Pass \\
+2 & Enter invalid Username and Password& It should not accept & Pass & Pass \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\section{System Implementation}
+
+It is the process of ensuring that the information system is operational, and then allowing users to take over its operation for use and evaluation. Implementation of PSVSMS includes activities such as:
+
+\begin{enumerate}
+    \item Training of end users how the whole system operates and the functionalities of the system
+    \item Completion of user documentation
+    \item System changeover
+    \item Evaluation of the system on regular intervals
+\end{enumerate}
+
 
 
 
