@@ -528,6 +528,20 @@ howevermuch springboot maybe good for development, it has its own challenges whi
   
   \item \textbf{Limited Flexibility}: While Spring Boot offers a wide range of features, its opinionated approach might limit flexibility for developers who prefer more control over their application's configuration.
 \end{enumerate}
+\subsection{React JS}
+\noindent React.js is a popular JavaScript library for building user interfaces, developed by Facebook. It is renowned for its component-based architecture, which allows developers to build reusable UI components and compose complex user interfaces efficiently.
+ React.js is a powerful library for building interactive and dynamic user interfaces, offering benefits such as a component-based architecture, virtual DOM for efficient rendering, declarative syntax for clarity, and a rich ecosystem with extensive community support.Some of the Advantaeges of React Js are listed below:
+ 
+\begin{enumerate}
+    \item \textbf{Component-based Architecture}: React.js follows a component-based architecture, which allows for the creation of reusable UI components. This is advantageous in a project like yours where there might be various modules and elements that need to be reused across different parts of the system, such as displaying vehicle information, safety statistics, etc.
+    
+    \item \textbf{Virtual DOM}: React.js utilizes a virtual DOM, which efficiently updates only the necessary parts of the actual DOM when data changes. In a real-time system like yours where vehicle data is constantly changing, this can lead to improved performance and responsiveness.
+    
+    \item \textbf{Declarative Syntax}: React.js uses a declarative syntax, making it easier to understand and maintain code. This is beneficial for developers working on the project, as it reduces cognitive load and helps in quickly identifying and fixing issues.
+    
+    \item \textbf{Large Ecosystem and Community Support}: React.js has a large ecosystem of libraries, tools, and resources available, along with a vast community of developers. This provides access to a wide range of pre-built components, middleware, and solutions that can expedite development and enhance the functionality of your system.
+\end{enumerate}
+
 
 \chapter{System Design}
 \section{Architectural Design} 
@@ -611,6 +625,55 @@ system does in more detail.
   \label{fig:Class diagram} % Label for cross-referencing
 \end{figure}
 \clearpage
+\subsection{Process flow}
+\subsubsection{Activity Diagrams}
+\noindent Activity diagrams show the flow of activities in the sytem.The following diagrams show user activity in the system.\par
+\textbf{\underline{Vehicle Owners actvity diagram}}\par
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.8\textwidth]{/home/bram/Documents/psvm-v1/Owner-activity-diagram.drawio.png} % Replace 'example-image' with your image file name
+  \caption{vehicle Owner activity diagram} % Caption for the figure
+  \label{fig:owners activity diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+
+\textbf{\underline{Commuters activity diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=1\textwidth]{/home/bram/Documents/psvm-v1/Commuters-activity.drawio.png} % Replace 'example-image' with your image file name
+  \caption{commuters activity diagram} % Caption for the figure
+  \label{fig:commuters activity diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\textbf{\underline{Inspector activity diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=1\textwidth]{/home/bram/Documents/psvm-v1/Inspector-activity.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Inspector activity diagram} % Caption for the figure
+  \label{fig:Inspector activity diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\textbf{\underline{crew activity diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=1\textwidth]{/home/bram/Documents/psvm-v1/crew-activity.drawio.png} % Replace 'example-image' with your image file name
+  \caption{crew activity diagram} % Caption for the figure
+  \label{fig:crew activity diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\subsubsection{Sequence Diagram}
+\noindent A sequence diagram is an interaction diagram that emphasizes the time ordering of messages.
+Graphically, a sequence diagram is a table that shows objects arranged along x-axis and
+messages, ordered in increasing time, along the y-axis
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=1\textwidth]{/home/bram/Documents/psvm-v1/user-sequence.drawio.png} % Replace 'example-image' with your image file name
+  \caption{user sequence diagram} % Caption for the figure
+  \label{fig:user sequence diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+
+
 \section{Database Design}
 \noindent Entity-Relationship Diagram (ERD) is a type of database design tool used to visually represent the logical structure of a database.
 An ERD consists of entities, attributes, and relationships. Entities represent real-world objects or concepts  that are stored in the database. Attributes are the properties or characteristics of entities . Relationships describe how entities are related to each other.\par
