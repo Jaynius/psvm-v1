@@ -1,1 +1,1 @@
-select * from vehicle_owners;
+select * from driver;

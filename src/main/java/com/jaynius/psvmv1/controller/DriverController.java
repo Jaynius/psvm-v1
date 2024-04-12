@@ -27,7 +27,7 @@ public class DriverController {
         return service.addDriver(newDriver);
     }
 
-    @GetMapping("/drivers/driver/{idnumber}")
+    @GetMapping("/drivers/driver/{idNumber}")
     public ResponseEntity<Driver> findDriverById(@PathVariable String idNumber){
         return service.findDriverById(idNumber);
     }
@@ -46,7 +46,7 @@ public class DriverController {
         return service.findAllDrivers();
     }
 
-    @DeleteMapping("drivers/delete/{idnumber}")
+    @DeleteMapping("drivers/delete/{idNumber}")
     public ResponseEntity<Driver> deleteDriver(@PathVariable String idNumber){
         return service.deleteDriverById(idNumber);
     }

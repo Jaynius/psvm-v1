@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.jaynius.psvmv1.DTO.ConductorDTO;
 import com.jaynius.psvmv1.model.Conductor;
 import com.jaynius.psvmv1.model.Vehicle;
 import com.jaynius.psvmv1.repository.ConductorRepository;
@@ -27,7 +26,7 @@ public class ConductorServiceImpl implements ConductorService {
     private final ConductorRepository repository;
 
     @Autowired
-    private final PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private final VehicleRepository vRepository;
@@ -35,25 +34,28 @@ public class ConductorServiceImpl implements ConductorService {
 
     @Override
    public  String  addConductor(Conductor conductor) {
-        repository.save(conductor);
+        // repository.save(conductor);
+        // return "Conductor added successfully";
+      Conductor newcConductor=new Conductor();
+        newcConductor.setIdNumber(conductor.getIdNumber());
+        newcConductor.setName(conductor.getName());
+        newcConductor.setContacts(conductor.getContacts()); 
+        newcConductor.setEmail(conductor.getEmail());
+        newcConductor.setPassword(passwordEncoder.encode(conductor.getPassword()));
+        repository.save(newcConductor);
         return "Conductor added successfully";
-      // Conductor newcConductor=new Conductor();
-      //   newcConductor.setIdNumber(conductorDTO.getIdNumber());
-      //   newcConductor.setName(conductorDTO.getName());
-      //   newcConductor.setContacts(conductorDTO.getContacts()); 
-      //   newcConductor.setEmail(conductorDTO.getEmail());
-      //   newcConductor.setPassword(passwordEncoder.encode(conductorDTO.getPassword()));
-      //   repository.save(newcConductor);
-      //   return "Conductor added successfully";
       
     }
 
     @Override
     public ResponseEntity<Conductor> findConductorById(String idNumber) {
-        @SuppressWarnings("null")
+     
         Optional<Conductor> existtingConductor=repository.findById(idNumber);
         if (existtingConductor.isPresent()) {
-            return new ResponseEntity<>(existtingConductor.get(),HttpStatus.FOUND);
+
+          Conductor conductor=existtingConductor.get();
+          conductor.setPassword(null);
+            return new ResponseEntity<>(conductor,HttpStatus.FOUND);
             
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -61,15 +63,26 @@ public class ConductorServiceImpl implements ConductorService {
 
     @Override
     public ResponseEntity<Conductor> updateConductorById(String idNumber, Conductor conductor) {
-        @SuppressWarnings("null")
+  
         Optional<Conductor> existingConductor=repository.findById(idNumber);
         if (existingConductor.isPresent()) {
             Conductor conductorToUpdate=existingConductor.get();
-            conductorToUpdate.setIdNumber(conductor.getIdNumber());
-            conductorToUpdate.setName(conductor.getName());
-            conductorToUpdate.setContacts(conductor.getContacts());
-            conductorToUpdate.setEmail(conductor.getEmail());
-            conductorToUpdate.setVehicle(conductor.getVehicle());
+            if(conductor.getIdNumber()!=null){
+                conductorToUpdate.setIdNumber(conductor.getIdNumber());
+            }
+            if(conductor.getName()!=null){
+                conductorToUpdate.setName(conductor.getName());
+            }
+            if(conductor.getContacts()!=null){
+                conductorToUpdate.setContacts(conductor.getContacts());
+            }
+            if(conductor.getEmail()!=null){
+                conductorToUpdate.setEmail(conductor.getEmail());
+            }
+            if(conductor.getVehicle()!=null){
+                conductorToUpdate.setVehicle(conductor.getVehicle());
+            }
+    
             repository.save(conductorToUpdate);
             return new ResponseEntity<>(HttpStatus.OK);
             
@@ -110,4 +123,18 @@ public class ConductorServiceImpl implements ConductorService {
         return new ResponseEntity<>(conductorList,HttpStatus.FOUND);
     }
 
-}
+    @Override
+    public ResponseEntity<Conductor> assigConductorToVehicle( String idNumber, String registrationNumber) {
+        Optional<Conductor> optionalConductor=repository.findById(idNumber);
+        Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
+        if (optionalConductor.isPresent() && optionalVehicle.isPresent()) {
+            Conductor conductor=optionalConductor.get();
+            Vehicle vehicle=optionalVehicle.get();
+            conductor.setVehicle(vehicle);
+            repository.save(conductor);
+            return new ResponseEntity<>(HttpStatus.OK);
+           
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }}
+

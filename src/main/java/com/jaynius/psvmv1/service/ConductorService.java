@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jaynius.psvmv1.DTO.ConductorDTO;
 import com.jaynius.psvmv1.model.Conductor;
+import com.jaynius.psvmv1.model.Vehicle;
 
 @Service
 public interface ConductorService {
@@ -16,7 +17,7 @@ public interface ConductorService {
          ResponseEntity<Conductor> deleteConductorById(String idNumber);
          ResponseEntity<Conductor> findConductorbyVehicle(String registrationNumber);
          ResponseEntity<List<Conductor>> findAllConductors();
-         
+         ResponseEntity<Conductor> assigConductorToVehicle(String idNumber, String registrationNumber);
 
 
 

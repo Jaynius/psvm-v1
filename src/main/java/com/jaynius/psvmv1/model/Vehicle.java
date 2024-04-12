@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -35,7 +38,9 @@ public class Vehicle {
     @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
     private Driver driver;
 
+
     @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
+    @JsonIgnore
     private Conductor conductor;
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
