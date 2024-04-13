@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.jaynius.psvmv1.DTO.ConductorDTO;
 import com.jaynius.psvmv1.model.Conductor;
-import com.jaynius.psvmv1.model.Vehicle;
 
 @Service
 public interface ConductorService {
@@ -18,7 +16,6 @@ public interface ConductorService {
          ResponseEntity<Conductor> findConductorbyVehicle(String registrationNumber);
          ResponseEntity<List<Conductor>> findAllConductors();
          ResponseEntity<Conductor> assigConductorToVehicle(String idNumber, String registrationNumber);
-
-
+         Integer countOfConductors();
 
 }

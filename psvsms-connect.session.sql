@@ -1,1 +1,1 @@
-select * from driver;
+select * from conductor;

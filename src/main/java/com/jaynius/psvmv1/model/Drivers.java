@@ -1,7 +1,6 @@
 package com.jaynius.psvmv1.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,16 +18,22 @@ import lombok.Setter;
 @Setter
 @Getter
 @Data
-public class Conductor {
+public class Drivers {
     @Id
     private String idNumber;
-    private String name, contacts,email;
+    private String name, contacts, email;
     private String password;
 
     @OneToOne
+    @JoinColumn(name="vehicle_Registration")
     @JsonBackReference
-    @JoinColumn(name = "vehicle_registration")
     private Vehicle vehicle;
+
+    // public void setPassword(Object object) {
+    //     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    //     this.password = passwordEncoder.encode(password);
+    // }
+
 
     
 }

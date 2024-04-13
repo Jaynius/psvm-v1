@@ -36,7 +36,8 @@ public class Vehicle {
     private Tracker tracker;
 
     @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
-    private Driver driver;
+    @JsonIgnore
+    private Drivers driver;
 
 
     @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)

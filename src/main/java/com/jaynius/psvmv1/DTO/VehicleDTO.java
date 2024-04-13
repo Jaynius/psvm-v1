@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.jaynius.psvmv1.model.Conductor;
-import com.jaynius.psvmv1.model.Driver;
+import com.jaynius.psvmv1.model.Drivers;
 import com.jaynius.psvmv1.model.Inspection;
 import com.jaynius.psvmv1.model.Tracker;
 import com.jaynius.psvmv1.model.Users;
@@ -24,7 +24,7 @@ public class VehicleDTO {
 
     private Tracker tracker;
 
-    private Driver driver;
+    private Drivers driver;
 
     private Conductor conductor;
 

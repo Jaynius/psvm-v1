@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.jaynius.psvmv1.model.Vehicle;
@@ -28,13 +29,23 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
     @Autowired 
     private final VehicleRepository vRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     
 
    
 
-    @SuppressWarnings("null")
     @Override
     public ResponseEntity<VehicleOwners> addOwner(VehicleOwners owner) {
+        VehicleOwners newOwner=new VehicleOwners();
+        newOwner.setIdNumber(owner.getIdNumber());
+        newOwner.setName(owner.getName());
+        newOwner.setContacts(owner.getContacts());
+        newOwner.setEmail(owner.getEmail());
+        newOwner.setLogBookNumber(owner.getLogBookNumber());
+        newOwner.setVehicle(owner.getVehicle());
+        newOwner.setPassword(passwordEncoder.encode(owner.getPassword()));
     repository.save(owner);
     return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -72,7 +83,6 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
 
     @Override
     public ResponseEntity<Set<VehicleOwners>> findOwnersByVehicleId(String registrationNumber) {
-        @SuppressWarnings("null")
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalVehicle.isPresent()) {
             Vehicle vehicle=optionalVehicle.get();
@@ -94,28 +104,9 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
     @Override
     public List<VehicleOwners>findAllOwners() {
        return repository.findAll();
-    //    repository.findAll().forEach(ownerList::add);
-    //    if (ownerList.isEmpty()) {
-    //     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        
-    //    }
-    //    return new ResponseEntity<>(ownerList,HttpStatus.FOUND);
+   
     }
 
-//     @Override
-// public ResponseEntity<List<VehicleOwners>> findAllOwners() {
-//     try {
-//         List<VehicleOwners> ownerList = repository.findAll();
-//         if (ownerList.isEmpty()) {
-//             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//         }
-//         return new ResponseEntity<>(ownerList, HttpStatus.FOUND);
-//     } catch (Exception e) {
-//         // Log the exception for debugging
-//         e.printStackTrace();
-//         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//     }
-// }
 
 
 }

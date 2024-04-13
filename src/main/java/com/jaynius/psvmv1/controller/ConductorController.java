@@ -21,7 +21,6 @@ import com.jaynius.psvmv1.service.ConductorService;
 @RequestMapping("/conductors")
 public class ConductorController {
     @Autowired
-
     private final ConductorService service;
 
     public ConductorController(ConductorService service) {
@@ -54,6 +53,21 @@ public class ConductorController {
     @GetMapping("vehicle/{registrationNumber}")
     public ResponseEntity<Conductor> findConductorByVehicle(@PathVariable String registrationNumber){
         return service.findConductorbyVehicle(registrationNumber);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Conductor>> allConductors(){
+        return service.findAllConductors();
+    }
+
+    @GetMapping("count")
+    public Integer countOfConductors(){
+        return service.countOfConductors();
+    }
+
+    @DeleteMapping("delete/{idNumber}")
+    public ResponseEntity<?> deleteDriver(@PathVariable String idNumber){
+        return service.deleteConductorById(idNumber);
     }
 
 }

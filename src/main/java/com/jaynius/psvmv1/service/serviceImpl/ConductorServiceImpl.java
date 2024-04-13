@@ -42,6 +42,7 @@ public class ConductorServiceImpl implements ConductorService {
         newcConductor.setContacts(conductor.getContacts()); 
         newcConductor.setEmail(conductor.getEmail());
         newcConductor.setPassword(passwordEncoder.encode(conductor.getPassword()));
+        
         repository.save(newcConductor);
         return "Conductor added successfully";
       
@@ -99,11 +100,12 @@ public class ConductorServiceImpl implements ConductorService {
 
     @Override
     public ResponseEntity<Conductor> findConductorbyVehicle(String registrationNumber) {
-      @SuppressWarnings("null")
+     
     Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
       if (optionalVehicle.isPresent()) {
         Vehicle vehicle=optionalVehicle.get();
         Conductor conductor=vehicle.getConductor();
+        conductor.setPassword(null);
         return new ResponseEntity<>(conductor,HttpStatus.FOUND);
 
         
@@ -115,7 +117,8 @@ public class ConductorServiceImpl implements ConductorService {
     @Override
     public ResponseEntity<List<Conductor>> findAllConductors() {
         List<Conductor> conductorList=new ArrayList<>();
-        repository.findAll().forEach(conductorList::add);
+        repository.findAll()
+                  .forEach(conductorList::add);
         if (conductorList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             
@@ -136,5 +139,18 @@ public class ConductorServiceImpl implements ConductorService {
            
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public Integer countOfConductors() {
+        int count=0;
+        List<Conductor> conductorList=new ArrayList<>();
+        repository.findAll().forEach(conductorList::add);
+        if (conductorList.isEmpty()) {
+            return null;
+            
+        }
+        count=conductorList.size();
+        return count;
     }}
 

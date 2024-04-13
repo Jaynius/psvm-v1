@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Inspector {
     @Id
     private String idNumber;
-    private String name,email,contact,password;
+    private String name,email,contacts,password;
 
        @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

@@ -15,6 +15,8 @@ public interface InspectionService {
     ResponseEntity<List<Inspection>> findInspectionByVehicleId(String registrationNumber);
     ResponseEntity<Inspection> deleteInspectionById(Long id);
     ResponseEntity<List<Inspection>> findAllInspection();
+    ResponseEntity<Inspection> assignInspectionToVehicle(Long id, String registrationNumber);
+
 
 
 }

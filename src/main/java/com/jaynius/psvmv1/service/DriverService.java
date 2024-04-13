@@ -5,15 +5,17 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.jaynius.psvmv1.model.Driver;
+import com.jaynius.psvmv1.model.Drivers;
 
 @Service
 public interface DriverService {
-    ResponseEntity<Driver> addDriver(Driver driver);
-    ResponseEntity<Driver> findDriverById(String idNumber);
-    ResponseEntity<Driver> updateDriverById(Driver driver,String idNumber);
-    ResponseEntity<Driver> deleteDriverById(String idNumber);
-    ResponseEntity<List<Driver>> findAllDrivers();
-    ResponseEntity<Driver> findDriverByVehicle(String registrationNumber);
-
+    String addDriver(Drivers driver);
+    ResponseEntity<Drivers> findDriverById(String idNumber);
+    ResponseEntity<Drivers> updateDriverById(Drivers driver,String idNumber);
+    ResponseEntity<?> deleteDriverById(String idNumber);
+    ResponseEntity<List<Drivers>> findAllDrivers();
+    ResponseEntity<Drivers> findDriverByVehicle(String registrationNumber);
+    Integer countOfDrivers();
+    ResponseEntity<Drivers> assignDriverToVehicle(String idNumber, String registrationNumber);
+    
 }

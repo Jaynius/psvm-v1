@@ -9,16 +9,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.jaynius.psvmv1.model.Driver;
+import com.jaynius.psvmv1.model.Drivers;
 import com.jaynius.psvmv1.model.Vehicle;
 import com.jaynius.psvmv1.repository.DriverRepository;
 import com.jaynius.psvmv1.repository.VehicleRepository;
 import com.jaynius.psvmv1.service.DriverService;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Component
 @AllArgsConstructor
+
 public class DriverServiceImpl implements DriverService{
     @Autowired
     private final DriverRepository repository;
@@ -26,37 +28,57 @@ public class DriverServiceImpl implements DriverService{
     @Autowired
     private final VehicleRepository vRepository;
 
-   
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @SuppressWarnings("null")
     @Override
-    public ResponseEntity<Driver> addDriver(Driver driver) {
-       repository.save(driver);
-       return new ResponseEntity<>(HttpStatus.CREATED);
+    public String addDriver(Drivers driver) {
+        Drivers newDriver=new Drivers();
+        newDriver.setIdNumber(driver.getIdNumber());
+        newDriver.setName(driver.getName());
+        newDriver.setContacts(driver.getContacts());
+        newDriver.setEmail(driver.getEmail());
+        newDriver.setPassword(passwordEncoder.encode(driver.getPassword()));
+
+        repository.save(newDriver);
+        return "Driver added successfully";
     }
 
     @Override
-    public ResponseEntity<Driver> findDriverById(String idNumber) {
-        @SuppressWarnings("null")
-        Optional<Driver> driver=repository.findById(idNumber);
+    public ResponseEntity<Drivers> findDriverById(String idNumber) {
+      
+        Optional<Drivers> driver=repository.findById(idNumber);
         if (driver.isPresent()) {
-            return new ResponseEntity<>(driver.get(),HttpStatus.FOUND);
+            Drivers returnDriver=driver.get();
+            returnDriver.setPassword(null);
+            return new ResponseEntity<>(returnDriver,HttpStatus.FOUND);
             
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Override
-    public ResponseEntity<Driver> updateDriverById(Driver driver, String idNumber) {
-      @SuppressWarnings("null")
-    Optional<Driver> existingDriver=repository.findById(idNumber);
+    public ResponseEntity<Drivers> updateDriverById(Drivers driver, String idNumber) {
+ 
+    Optional<Drivers> existingDriver=repository.findById(idNumber);
       if (existingDriver.isPresent()) {
-        Driver updatedDriver=existingDriver.get();
-        updatedDriver.setIdnumber(driver.getIdnumber());
-        updatedDriver.setName(driver.getName());
-        updatedDriver.setEmail(driver.getEmail());
-        updatedDriver.setContact(driver.getContact());
-        updatedDriver.setVehicle(driver.getVehicle());
+        Drivers updatedDriver=existingDriver.get();
+        if(driver.getIdNumber()!=null){
+        updatedDriver.setIdNumber(driver.getIdNumber());
+    }
+        if (driver.getName()!=null) {
+            updatedDriver.setName(driver.getName());   
+        }
+        if (driver.getEmail()!=null) {
+            updatedDriver.setEmail(driver.getEmail()); 
+        }
+        if (driver.getContacts()!=null) {
+            updatedDriver.setContacts(driver.getContacts());
+        }
+        if (driver.getVehicle()!=null) {
+            updatedDriver.setVehicle(driver.getVehicle());
+        }
+       
         repository.save(updatedDriver);
         return new ResponseEntity<>(HttpStatus.OK);
         
@@ -64,44 +86,71 @@ public class DriverServiceImpl implements DriverService{
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @SuppressWarnings("null")
     @Override
-    public ResponseEntity<Driver> deleteDriverById(String idNumber) {
-        @SuppressWarnings("null")
-        Optional<Driver> existingDriver=repository.findById(idNumber);
-        if (existingDriver.isPresent()) {
-            repository.deleteById(idNumber);
-            return new ResponseEntity<>(HttpStatus.OK);
-            
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Drivers> deleteDriverById(String idNumber) {
+        repository.deleteById(idNumber);
+        return new ResponseEntity<>(HttpStatus.OK);
+        
     }
 
     @Override
-    public ResponseEntity<List<Driver>> findAllDrivers() {
+    public ResponseEntity<List<Drivers>> findAllDrivers() {
   
-        List<Driver> driverList=new ArrayList<>();
-        repository.findAll().forEach(driverList::add);
+        List<Drivers> driverList=new ArrayList<>();
+        repository.findAll()
+                  .forEach(driverList::add);
         if (driverList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             
         }
         return new ResponseEntity<>(driverList,HttpStatus.FOUND);
-
     }
 
     @Override
-    public ResponseEntity<Driver> findDriverByVehicle(String registrationNumber) {
-        @SuppressWarnings("null")
+    public ResponseEntity<Drivers> findDriverByVehicle(String registrationNumber) {
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalVehicle.isPresent()) {
             Vehicle vehicle=optionalVehicle.get();
-            Driver driver=vehicle.getDriver();
+            Drivers driver=vehicle.getDriver();
+            driver.setPassword(null);
             return new ResponseEntity<>(driver,HttpStatus.FOUND);
             
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     
     }
+
+    @Override
+    public Integer countOfDrivers() {
+        int count=0;
+        List<Drivers> driverList=new ArrayList<>();
+        repository.findAll().forEach(driverList::add);
+        if (driverList.isEmpty()) {
+            return null;
+
+        }
+        count=driverList.size();
+        return count;
+
+    }
+
+    @Override
+    public ResponseEntity<Drivers> assignDriverToVehicle(String idNumber, String registrationNumber) {
+        Optional<Drivers> optionalDriver=repository.findById(idNumber);
+        Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
+        if (optionalDriver.isPresent() && optionalVehicle.isPresent()) {
+            Drivers driver=optionalDriver.get();
+            Vehicle vehicle=optionalVehicle.get();
+            driver.setVehicle(vehicle);
+            repository.save(driver);
+            return new ResponseEntity<>(HttpStatus.OK);
+           
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+  
+
+    
 
 }

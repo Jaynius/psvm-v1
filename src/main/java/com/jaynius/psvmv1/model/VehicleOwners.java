@@ -25,7 +25,8 @@ import lombok.Setter;
 public class VehicleOwners {
     @Id
     private String idNumber;
-    private String logBookNumber,name,contacts,email, password;
+    private String logBookNumber,name,contacts,email;
+    private String password;
 
     @ManyToMany
     @JoinTable(name = "owner_vehicle",
@@ -34,8 +35,5 @@ public class VehicleOwners {
     )
     private Set<Vehicle> vehicle=new HashSet<>();
 
-    public void setPassword(String password){
-        this.password = new BCryptPasswordEncoder().encode(password);
-    }
 
 }

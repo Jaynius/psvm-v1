@@ -17,7 +17,7 @@ import com.jaynius.psvmv1.model.VehicleOwners;
 import com.jaynius.psvmv1.service.VehicleOwnerService;
 
 @RestController
-@RequestMapping("/v1/owners")
+@RequestMapping("/owners")
 public class VehicleOwnerController {
     private final VehicleOwnerService service;
 
@@ -29,25 +29,25 @@ public class VehicleOwnerController {
         return service.addOwner(owner);
     }
 
-    @GetMapping("/owners/owner/{idNumber}")
+    @GetMapping("/{idNumber}")
     public ResponseEntity<VehicleOwners> findOwnersById(@PathVariable String idNumber){
         return service.findOwnersById(idNumber);
     }
 
-    @PutMapping("/owner/update/{idnumber}")
+    @PutMapping("/update/{idnumber}")
     public ResponseEntity<VehicleOwners> updateOwnersById(@RequestBody VehicleOwners owner,@PathVariable String idNumber){
         return service.updateOwnersById(owner, idNumber);
     }
 
-    @GetMapping("/owners/vehicle/{registrationNumber}")
+    @GetMapping("/vehicle/{registrationNumber}")
     public ResponseEntity<Set<VehicleOwners>> findOwnersByVehicleId(@PathVariable String registrationNumber){
         return service.findOwnersByVehicleId(registrationNumber);
     }
-    @DeleteMapping("/owners/delete/{idnumber}")
+    @DeleteMapping("/delete/{idnumber}")
     public void deleteOwnersById(@PathVariable String idNumber){
         service.deleteOwnersById(idNumber);
     } 
-    @GetMapping("/owners")
+    @GetMapping("/all")
     public List<VehicleOwners> findallOwners(){
         return service.findAllOwners();
     }

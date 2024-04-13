@@ -55,16 +55,28 @@ public class InspectionServiceImpl implements InspectionService {
         Optional<Inspection> existingInspection=repository.findById(id);
         if (existingInspection.isPresent()) {
             Inspection updatedInspection=existingInspection.get();
-            updatedInspection.setVehicle(inspection.getVehicle());
-            updatedInspection.setRegistrationDate(inspection.getRegistrationDate());
-            updatedInspection.setBrakes(inspection.isBrakes());
-            updatedInspection.setSeatBelts(inspection.isSeatBelts());
-            updatedInspection.setSpeedGovernor(inspection.isSpeedGovernor());
-            updatedInspection.setTires(inspection.isTires());
-            updatedInspection.setWindShield(inspection.isWindShield());
-            updatedInspection.setWindows(inspection.isWindows());
-            updatedInspection.setWipers(inspection.isWipers());
-            updatedInspection.setInspectionDate(inspection.getInspectionDate());
+            if(inspection.isSpeedGovernor()) {
+                updatedInspection.setSpeedGovernor(inspection.isSpeedGovernor());
+            }
+            if(inspection.isSeatBelts()) {
+                updatedInspection.setSeatBelts(inspection.isSeatBelts());
+            }
+            if(inspection.isWipers()) {
+                updatedInspection.setWipers(inspection.isWipers());
+            }
+            if(inspection.isWindShield()) {
+                updatedInspection.setWindShield(inspection.isWindShield());
+            }
+            if(inspection.isWindows()) {
+                updatedInspection.setWindows(inspection.isWindows());
+            }
+            if(inspection.isTires()) {
+                updatedInspection.setTires(inspection.isTires());
+            }
+            if(inspection.isBrakes()) {
+                updatedInspection.setBrakes(inspection.isBrakes());
+            }
+            
             repository.save(updatedInspection);
             return new ResponseEntity<>(HttpStatus.OK);
             
@@ -108,6 +120,26 @@ public class InspectionServiceImpl implements InspectionService {
         
        }
        return new ResponseEntity<>(inspectionList,HttpStatus.FOUND);
+    }
+
+    @Override
+    public ResponseEntity<Inspection> assignInspectionToVehicle(Long id, String registrationNumber) {
+        Optional<Inspection> optionalInspection=repository.findById(id);
+        Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
+        if (optionalInspection.isPresent() && optionalVehicle.isPresent()) {
+            Inspection inspection=optionalInspection.get();
+            Vehicle vehicle=optionalVehicle.get();
+            vehicle.getInspections().add(inspection);
+            vRepository.save(vehicle);
+            return new ResponseEntity<>(HttpStatus.OK);
+            
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public Integer countOfInspections() {
+        return (int) repository.count();
     }
 
 }
