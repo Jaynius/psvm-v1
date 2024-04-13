@@ -98,10 +98,10 @@ public class InspectionServiceImpl implements InspectionService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @SuppressWarnings("null")
+   
     @Override
     public ResponseEntity<Inspection> deleteInspectionById(Long id) {
-       @SuppressWarnings("null")
+      
     Optional<Inspection> inspection=repository.findById(id);
        if (inspection.isPresent()) {
         repository.deleteById(id);

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.jaynius.psvmv1.model.Inspector;
+import com.jaynius.psvmv1.model.Vehicle;
 import com.jaynius.psvmv1.repository.InspectorRepository;
 import com.jaynius.psvmv1.repository.VehicleRepository;
 import com.jaynius.psvmv1.service.InspectorService;
@@ -82,8 +83,17 @@ public class InspectorServiceImpl implements InspectorService {
 
     @Override
     public List<Inspector> findInspectorsbyVehicle(String registration) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findInspectorsbyVehicle'");
+        Vehicle vehicle = vRepository.findById(registration).orElse(null);
+
+        if (vehicle != null) {
+            // If vehicle is found, find inspectors associated with the vehicle
+           
+        } else {
+            // If vehicle is not found, return an empty list or handle the case as needed
+            return List.of();
+        }
+        return null;
     }
+    
 
 }

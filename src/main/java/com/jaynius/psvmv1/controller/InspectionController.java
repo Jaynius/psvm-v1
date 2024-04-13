@@ -59,5 +59,10 @@ public class InspectionController {
         return service.assignInspectionToVehicle(id, registrationNumber);
     }
 
+    @GetMapping("/count")
+    public Integer countOfInspections(){
+        return service.countOfInspections();
+    }
+
     
 } 

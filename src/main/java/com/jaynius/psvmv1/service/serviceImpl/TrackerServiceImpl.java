@@ -31,7 +31,6 @@ public class TrackerServiceImpl implements TrackerService{
 
    
 
-    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Tracker> addTracker(Tracker tracker) {
         repository.save(tracker);
@@ -40,7 +39,6 @@ public class TrackerServiceImpl implements TrackerService{
 
     @Override
     public ResponseEntity<Tracker> findTrackerById(String serialNumber) {
-       @SuppressWarnings("null")
     Optional<Tracker> tracker=repository.findById(serialNumber);
        if (tracker.isPresent()) {
         return new ResponseEntity<>(tracker.get(),HttpStatus.FOUND);
@@ -51,7 +49,6 @@ public class TrackerServiceImpl implements TrackerService{
 
     @Override
     public ResponseEntity<Tracker> updateTrackerById(Tracker tracker, String serialNumber) {
-       @SuppressWarnings("null")
     Optional<Tracker> existingTracker=repository.findById(serialNumber);
        if (existingTracker.isPresent()) {
         Tracker updatedTracker=existingTracker.get();
