@@ -1,10 +1,7 @@
 package com.jaynius.psvmv1.service.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,11 +79,11 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
     }
 
     @Override
-    public ResponseEntity<Set<VehicleOwners>> findOwnersByVehicleId(String registrationNumber) {
+    public ResponseEntity<VehicleOwners> findOwnersByVehicleId(String registrationNumber) {
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalVehicle.isPresent()) {
             Vehicle vehicle=optionalVehicle.get();
-            Set<VehicleOwners> vehicleOwners=vehicle.getOwners();
+            VehicleOwners vehicleOwners=vehicle.getOwners();
             return new ResponseEntity<>(vehicleOwners,HttpStatus.FOUND);
             
         }
@@ -105,6 +102,21 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
     public List<VehicleOwners>findAllOwners() {
        return repository.findAll();
    
+    }
+
+    @Override
+    public ResponseEntity<VehicleOwners> assignOwnerToVehicle(String idNumber, String registrationNumber) {
+        Optional<VehicleOwners> optionalOwner=repository.findById(idNumber);
+        Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
+        if (optionalOwner.isPresent() && optionalVehicle.isPresent()) {
+            VehicleOwners owner=optionalOwner.get();
+            Vehicle vehicle=optionalVehicle.get();
+            owner.setVehicle(vehicle);
+            repository.save(owner);
+            return new ResponseEntity<>(HttpStatus.OK);
+            
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 

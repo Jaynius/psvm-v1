@@ -3,11 +3,10 @@ package com.jaynius.psvmv1.service.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.jaynius.psvmv1.model.Users;
@@ -20,6 +19,7 @@ import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
+
 public class UserServiceImpl implements UsersService {
 
     @Autowired
@@ -27,6 +27,9 @@ public class UserServiceImpl implements UsersService {
 
     @Autowired
     private final VehicleRepository vRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
    
 
@@ -51,12 +54,12 @@ public class UserServiceImpl implements UsersService {
     }
 
     @Override
-    public ResponseEntity<Set<Users>> findUsersByVehicle(String registrationNumber) {
+    public ResponseEntity<Users> findUsersByVehicle(String registrationNumber) {
        @SuppressWarnings("null")
     Optional<Vehicle> optionaVehicle=vRepository.findById(registrationNumber);
        if (optionaVehicle.isPresent()) {
         Vehicle vehicle=optionaVehicle.get();
-        Set<Users> users=vehicle.getUsers();
+        Users users=vehicle.getUsers();
         return new ResponseEntity<>(users,HttpStatus.FOUND);
         
        }
@@ -65,7 +68,7 @@ public class UserServiceImpl implements UsersService {
 
     @Override
     public ResponseEntity<Users> updateUserById(Users user, String idNumber) {
-        @SuppressWarnings("null")
+        
         Optional<Users> existingUser=repository.findById(idNumber);
         if (existingUser.isPresent()) {
             Users updatedUser=existingUser.get();
@@ -73,7 +76,8 @@ public class UserServiceImpl implements UsersService {
             updatedUser.setName(user.getName());
             updatedUser.setContacts(user.getContacts());
             updatedUser.setEmail(user.getEmail());
-            updatedUser.setVehicles(user.getVehicles());
+            updatedUser.setVehicle(user.getVehicle());
+            updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
             repository.save(updatedUser);
             return new ResponseEntity<>(HttpStatus.OK);
 
@@ -104,6 +108,37 @@ public class UserServiceImpl implements UsersService {
     
        }
        return new ResponseEntity<>(userlList,HttpStatus.FOUND);
+    }
+
+    @Override
+    public ResponseEntity<Users> assignUserToVehicle(String idNumber, String registrationNumber) {
+        Optional<Users> optionalUser=repository.findById(idNumber);
+        if (optionalUser.isPresent()) {
+            Users user=optionalUser.get();
+            
+            Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
+            if (optionalVehicle.isPresent()) {
+                Vehicle vehicle=optionalVehicle.get();
+                user.setVehicle(vehicle);
+                repository.save(user);
+                return new ResponseEntity<>(HttpStatus.OK);
+                
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<Integer> countUsers() {
+       int count=0;
+         List<Users> userList=new ArrayList<>();
+            repository.findAll().forEach(userList::add);
+            if (userList.isEmpty()) {
+                return null;
+            }
+            count=userList.size();
+            return new ResponseEntity<>(count,HttpStatus.FOUND);
     }
 
 }

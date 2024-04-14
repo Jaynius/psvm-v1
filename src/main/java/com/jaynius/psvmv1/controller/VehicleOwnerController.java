@@ -1,11 +1,10 @@
 package com.jaynius.psvmv1.controller;
 
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,7 +39,7 @@ public class VehicleOwnerController {
     }
 
     @GetMapping("/vehicle/{registrationNumber}")
-    public ResponseEntity<Set<VehicleOwners>> findOwnersByVehicleId(@PathVariable String registrationNumber){
+    public ResponseEntity<VehicleOwners> findOwnersByVehicleId(@PathVariable String registrationNumber){
         return service.findOwnersByVehicleId(registrationNumber);
     }
     @DeleteMapping("/delete/{idnumber}")
@@ -50,6 +49,11 @@ public class VehicleOwnerController {
     @GetMapping("/all")
     public List<VehicleOwners> findallOwners(){
         return service.findAllOwners();
+    }
+
+    @PatchMapping("/assign/{idNumber}/vehicle/{registrationNumber}")
+    public ResponseEntity<VehicleOwners> assignOwnerToVehicle(@PathVariable String idNumber, @PathVariable String registrationNumber){
+        return service.assignOwnerToVehicle(idNumber, registrationNumber);
     }
 
 }
