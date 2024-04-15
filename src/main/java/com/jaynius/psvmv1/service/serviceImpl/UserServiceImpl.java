@@ -36,6 +36,8 @@ public class UserServiceImpl implements UsersService {
     @SuppressWarnings("null")
     @Override
     public ResponseEntity<Users> addUsers(Users user) {
+        
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
 

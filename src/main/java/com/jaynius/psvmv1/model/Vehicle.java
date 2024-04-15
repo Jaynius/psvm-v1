@@ -41,8 +41,7 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
     private List<Inspection> inspections=new ArrayList<>();
 
-    @OneToOne
-    @JsonManagedReference
+    @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
     private Users users;
 
     @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)

@@ -33,6 +33,8 @@ public class InspectionServiceImpl implements InspectionService {
     @SuppressWarnings("null")
     @Override
     public ResponseEntity<Inspection> addInspection(Inspection inspection) {
+        Inspection newInspection=new Inspection();
+        
         repository.save(inspection);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

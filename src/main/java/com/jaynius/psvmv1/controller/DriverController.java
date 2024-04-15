@@ -3,6 +3,7 @@ package com.jaynius.psvmv1.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,6 +18,7 @@ import com.jaynius.psvmv1.service.DriverService;
 
 @RestController
 @RequestMapping("/drivers")
+@CrossOrigin
 public class DriverController {
     private final DriverService service;
 

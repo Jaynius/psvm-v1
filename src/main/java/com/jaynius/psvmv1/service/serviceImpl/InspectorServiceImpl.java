@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.jaynius.psvmv1.model.Inspector;
@@ -49,7 +52,7 @@ public class InspectorServiceImpl implements InspectorService {
     }
 
     @Override
-    public Inspector updaInspectorbyId(Inspector inspector, String idNumber) {
+    public ResponseEntity<Inspector> updateInspectorbyId(Inspector inspector, String idNumber) {
         Optional<Inspector> existingInspector=repository.findById(idNumber);
         if (existingInspector.isPresent()) {
             Inspector updatedInspector=existingInspector.get();
@@ -66,9 +69,9 @@ public class InspectorServiceImpl implements InspectorService {
                 updatedInspector.setPassword(inspector.getPassword());
             }
             repository.save(updatedInspector);
-            return updatedInspector;
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return null;
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Override
