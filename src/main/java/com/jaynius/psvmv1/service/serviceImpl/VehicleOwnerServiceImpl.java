@@ -2,6 +2,8 @@ package com.jaynius.psvmv1.service.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +43,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
         newOwner.setContacts(owner.getContacts());
         newOwner.setEmail(owner.getEmail());
         newOwner.setLogBookNumber(owner.getLogBookNumber());
-        newOwner.setVehicle(owner.getVehicle());
+        newOwner.setVehicles(owner.getVehicles());
         newOwner.setPassword(passwordEncoder.encode(owner.getPassword()));
     repository.save(owner);
     return new ResponseEntity<>(HttpStatus.CREATED);
@@ -70,7 +72,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
             updatedOwner.setContacts(owner.getContacts());
             updatedOwner.setEmail(owner.getEmail());
             updatedOwner.setLogBookNumber(owner.getLogBookNumber());
-            updatedOwner.setVehicle(owner.getVehicle());
+            updatedOwner.setVehicles(owner.getVehicles());
             repository.save(updatedOwner);
             return new ResponseEntity<>(HttpStatus.OK);
             
@@ -79,11 +81,11 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
     }
 
     @Override
-    public ResponseEntity<VehicleOwners> findOwnersByVehicleId(String registrationNumber) {
+    public ResponseEntity<Set<VehicleOwners>> findOwnersByVehicleId(String registrationNumber) {
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalVehicle.isPresent()) {
             Vehicle vehicle=optionalVehicle.get();
-            VehicleOwners vehicleOwners=vehicle.getOwners();
+            Set<VehicleOwners> vehicleOwners=vehicle.getOwners();
             return new ResponseEntity<>(vehicleOwners,HttpStatus.FOUND);
             
         }
@@ -110,8 +112,9 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService{
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalOwner.isPresent() && optionalVehicle.isPresent()) {
             VehicleOwners owner=optionalOwner.get();
-            Vehicle vehicle=optionalVehicle.get();
-            owner.setVehicle(vehicle);
+            @SuppressWarnings("unchecked")
+            Set<Vehicle> vehicle=(Set<Vehicle>) optionalVehicle.get();
+            owner.setVehicles(vehicle);
             repository.save(owner);
             return new ResponseEntity<>(HttpStatus.OK);
             

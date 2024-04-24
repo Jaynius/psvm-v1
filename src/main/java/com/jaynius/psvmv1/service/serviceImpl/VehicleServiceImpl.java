@@ -3,6 +3,8 @@ package com.jaynius.psvmv1.service.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -96,11 +98,11 @@ public class VehicleServiceImpl implements Vehicleservice{
 
     @SuppressWarnings("null")
     @Override
-    public ResponseEntity<Vehicle> findVehicleByOwnerId(String idNumber) {
+    public ResponseEntity<Set<Vehicle>> findVehicleByOwnerId(String idNumber) {
        Optional<VehicleOwners> optionalOwner=vOwnerRepository.findById(idNumber);
        if (optionalOwner.isPresent()) {
         VehicleOwners owner=optionalOwner.get();
-        Vehicle vehicles=owner.getVehicle();
+        Set<Vehicle> vehicles=owner.getVehicles();
         return new ResponseEntity<>(vehicles,HttpStatus.FOUND);
 
         

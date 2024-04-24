@@ -2,6 +2,7 @@ package com.jaynius.psvmv1.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,6 @@ public interface InspectorService {
     ResponseEntity<Inspector> updateInspectorbyId(Inspector inspector,String idNumber);
     void deleteInspector(String idNumber);
     List<Inspector> allInspector();
-    List<Inspector> findInspectorsbyVehicle(String registration);
+    Set<Inspector> findInspectorsbyVehicle(String registration);
 
 }

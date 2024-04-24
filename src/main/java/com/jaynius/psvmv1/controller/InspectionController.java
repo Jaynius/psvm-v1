@@ -1,6 +1,7 @@
 package com.jaynius.psvmv1.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,7 +43,7 @@ public class InspectionController {
 
     }
     @GetMapping("/vehicle/{registrationnumber}")
-    ResponseEntity<List<Inspection>> findInspectionByVehicleId(@PathVariable String registrationNumber){
+    ResponseEntity<Set<Inspection>> findInspectionByVehicleId(@PathVariable String registrationNumber){
         return service.findInspectionByVehicleId(registrationNumber);
 
     }

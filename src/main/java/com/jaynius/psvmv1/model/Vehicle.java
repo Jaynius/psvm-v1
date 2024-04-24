@@ -1,19 +1,18 @@
 package com.jaynius.psvmv1.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -33,23 +32,20 @@ public class Vehicle {
     @JsonIgnore
     private Drivers driver;
 
-
+    @OneToMany(mappedBy = "vehicles",cascade = CascadeType.ALL)
+    private Set<Inspector> inspectors = new HashSet<>();
+    
     @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
-    @JsonIgnore
     private Conductor conductor;
 
-    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
-    private List<Inspection> inspections=new ArrayList<>();
+    @OneToMany(mappedBy = "vehicles", cascade = CascadeType.ALL)
+    private Set<Users> users = new HashSet<>();
 
-    @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
-    private Users users;
+    @OneToMany(mappedBy = "vehicle",cascade = CascadeType.ALL)
+    private Set<Inspection> inspections = new HashSet<>();
 
-    @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
-    @JsonIgnore
-    private VehicleOwners owners;
-
-    
-    
+    @ManyToMany(mappedBy = "vehicles",cascade = CascadeType.ALL)
+    private Set<VehicleOwners> owners = new HashSet<>();
 
 
 }

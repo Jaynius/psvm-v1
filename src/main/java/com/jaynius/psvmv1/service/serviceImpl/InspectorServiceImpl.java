@@ -2,6 +2,7 @@ package com.jaynius.psvmv1.service.serviceImpl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -85,16 +86,15 @@ public class InspectorServiceImpl implements InspectorService {
     }
 
     @Override
-    public List<Inspector> findInspectorsbyVehicle(String registration) {
-        Vehicle vehicle = vRepository.findById(registration).orElse(null);
-
-        if (vehicle != null) {
-            // If vehicle is found, find inspectors associated with the vehicle
-           
-        } else {
-            // If vehicle is not found, return an empty list or handle the case as needed
-            return List.of();
+    public Set<Inspector> findInspectorsbyVehicle(String registration) {
+        Optional<Vehicle> optionalVehicle =vRepository.findById(registration);
+        if (optionalVehicle.isPresent()) {
+            Vehicle vehicle=optionalVehicle.get();
+            Set<Inspector> inspectors=vehicle.getInspectors();
+            return inspectors;
+            
         }
+
         return null;
     }
     

@@ -1,8 +1,13 @@
 package com.jaynius.psvmv1.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,9 +27,13 @@ public class VehicleOwners {
     private String logBookNumber,name,contacts,email;
     private String password;
 
-   @OneToOne
-    @JoinColumn(name = "vehicle_registration")
-    private Vehicle vehicle;
+    @ManyToMany
+    @JoinTable(
+        name = "vehicles_owners",
+        joinColumns={@JoinColumn(name = "ownerId")},
+        inverseJoinColumns = {@JoinColumn(name="vehicle_id")}
+    )
+    private Set<Vehicle> vehicles=new HashSet<>();
 
 
 }

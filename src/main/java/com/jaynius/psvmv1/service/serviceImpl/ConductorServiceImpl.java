@@ -102,15 +102,15 @@ public class ConductorServiceImpl implements ConductorService {
     public ResponseEntity<Conductor> findConductorbyVehicle(String registrationNumber) {
      
     Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
-      if (optionalVehicle.isPresent()) {
-        Vehicle vehicle=optionalVehicle.get();
-        Conductor conductor=vehicle.getConductor();
-        conductor.setPassword(null);
-        return new ResponseEntity<>(conductor,HttpStatus.FOUND);
+        if (optionalVehicle.isPresent()) {
+            Vehicle vehicle=optionalVehicle.get();
+            Conductor conductor=vehicle.getConductor();
+            conductor.setPassword(null);
+            return new ResponseEntity<>(conductor,HttpStatus.FOUND);
 
-        
-      }
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
 

@@ -3,6 +3,7 @@ package com.jaynius.psvmv1.service.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -88,12 +89,12 @@ public class InspectionServiceImpl implements InspectionService {
     }
 
     @Override
-    public ResponseEntity<List<Inspection>> findInspectionByVehicleId(String registrationNumber) {
+    public ResponseEntity<Set<Inspection>> findInspectionByVehicleId(String registrationNumber) {
         @SuppressWarnings("null")
         Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
         if (optionalVehicle.isPresent()) {
             Vehicle vehicle=optionalVehicle.get();
-            List<Inspection> inspection=vehicle.getInspections();
+            Set<Inspection> inspection=vehicle.getInspections();
             return new ResponseEntity<>(inspection,HttpStatus.FOUND);
             
         }

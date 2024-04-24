@@ -30,8 +30,13 @@ public class Inspector {
     )
     private Set<Inspection> inspections=new HashSet<>();
 
-    
-        
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+        name = "inspector_vehicles",
+        joinColumns={@JoinColumn(name = "inspectorId")},
+        inverseJoinColumns = {@JoinColumn(name="vehicle_id")}
+    )
+    private Set<Vehicle> vehicles=new HashSet<>();
     
 
 }

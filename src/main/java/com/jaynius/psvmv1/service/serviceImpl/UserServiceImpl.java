@@ -3,6 +3,8 @@ package com.jaynius.psvmv1.service.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UsersService {
 
     @SuppressWarnings("null")
     @Override
-    public ResponseEntity<Users> addUsers(Users user) {
+   public ResponseEntity<Users> addUsers(Users user) {
         
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
@@ -56,12 +58,12 @@ public class UserServiceImpl implements UsersService {
     }
 
     @Override
-    public ResponseEntity<Users> findUsersByVehicle(String registrationNumber) {
+    public ResponseEntity <Set<Users>> findUsersByVehicle(String registrationNumber) {
        @SuppressWarnings("null")
     Optional<Vehicle> optionaVehicle=vRepository.findById(registrationNumber);
        if (optionaVehicle.isPresent()) {
         Vehicle vehicle=optionaVehicle.get();
-        Users users=vehicle.getUsers();
+        Set<Users> users=vehicle.getUsers();
         return new ResponseEntity<>(users,HttpStatus.FOUND);
         
        }
@@ -78,7 +80,7 @@ public class UserServiceImpl implements UsersService {
             updatedUser.setName(user.getName());
             updatedUser.setContacts(user.getContacts());
             updatedUser.setEmail(user.getEmail());
-            updatedUser.setVehicle(user.getVehicle());
+            updatedUser.setVehicles(user.getVehicles());
             updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
             repository.save(updatedUser);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -115,18 +117,14 @@ public class UserServiceImpl implements UsersService {
     @Override
     public ResponseEntity<Users> assignUserToVehicle(String idNumber, String registrationNumber) {
         Optional<Users> optionalUser=repository.findById(idNumber);
-        if (optionalUser.isPresent()) {
+        Optional<Vehicle> optionaVehicle=vRepository.findById(registrationNumber);
+        if (optionaVehicle.isPresent()&&optionalUser.isPresent()) {
             Users user=optionalUser.get();
-            
-            Optional<Vehicle> optionalVehicle=vRepository.findById(registrationNumber);
-            if (optionalVehicle.isPresent()) {
-                Vehicle vehicle=optionalVehicle.get();
-                user.setVehicle(vehicle);
-                repository.save(user);
-                return new ResponseEntity<>(HttpStatus.OK);
-                
-            }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            @SuppressWarnings("unchecked")
+            Set<Vehicle>  vehicle=(Set<Vehicle>) optionaVehicle.get();
+            user.setVehicles(vehicle);
+            repository.save(user);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
