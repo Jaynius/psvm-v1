@@ -1,0 +1,876 @@
+\documentclass[a4paper, 12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage[margin=1.5in,top=1in,bottom=1in,right=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc} % Font encoding
+\usepackage{graphicx} % For including images
+
+
+ % 1.5 spacing
+\setlength{\parskip}{6pt plus 1pt minus 1pt} % Paragraph spacing
+% Custom title page
+\begin{document}
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.2\textwidth]{/home/bram/Documents/14824.png} % Replace mmu_logo.png with your university logo
+    \vspace{0.5cm}
+    
+    {\scshape\Large Multimedia University of Kenya \par}
+    \vspace{0.5cm}
+    {\scshape\Large Faculty of Computing \& Information Technology \par}
+    \vspace{1cm}
+    
+    {\huge\bfseries Public Service Vehicle Safety Management System\par}
+    \vspace{2cm}
+    
+    {\Large\itshape By\par}
+    \vspace{0.5cm}
+    {\Large BRAMWEL JUMA BARASA \par}
+    \vspace{0.3cm}
+    {\Large CIT-223-028/2021 \par}
+    \vspace{0.5cm}
+    {\Large Supervisor:MS YVETTE OTUKANA\par}
+    \vspace{2cm}
+
+    {\large \today\par}
+    \vspace{1cm}
+    
+
+    {\Large Submitted in partial fulfillment of the requirements of Third Year Bachelor of Science in \par}
+    {\Large Computer Science \par}
+    
+
+\end{titlepage}
+
+\pagenumbering{roman}
+% Start of the actual document
+\section{Declaration}
+% Your content here
+
+\noindent I hereby declare that this Project is my own work and has, to the best of my knowledge, not been submitted to any other institution of higher learning.
+
+\medskip
+
+\noindent \textbf{Student:} \underline{\hspace{5cm}\par}
+
+\noindent \textbf{Registration Number:} \underline{\hspace{5cm} \par}
+
+\noindent \textbf{Signature:} \underline{\hspace{5cm}} \hspace{1cm} 
+\noindent \textbf{Date:} \underline{\hspace{4cm}}
+
+\vspace{2cm}
+
+\noindent This project has been submitted as a partial fulfillment of requirements for the Bachelor of Science in Software Engineering of Multimedia University of Kenya with my approval as the University supervisor.
+
+\medskip
+
+\noindent \textbf{Supervisor:} \underline{\hspace{5cm}}
+
+\noindent \textbf{Signature:} \underline{\hspace{5cm}} \hspace{1cm} \textbf{Date:} \underline{\hspace{4cm}}
+
+\newpage
+
+\section{Dedication}
+\noindent My dearest parents,Mr Nalwa Enos and Mrs Wakoli Florence, Throughout my journey, your unwavering love, support, and encouragement have been the guiding stars lighting my path. Every milestone achieved and every success attained is a testament to your boundless sacrifices and endless belief in me.
+
+Mom and Dad, your selflessness knows no bounds. You've instilled in me the values of perseverance, determination, and resilience, shaping me into the person I am today. Your faith in my abilities has been my greatest source of strength, propelling me forward even in the face of adversity.
+
+As I dedicate this project to you, I want to express my deepest gratitude for your ceaseless devotion and for being my pillars of strength. Your love has been the driving force behind every endeavor, and it is with immense pride and joy that I share this achievement with you.
+
+This project is not just a culmination of my efforts but also a reflection of your endless love and support. Thank you for being my inspiration, my motivation, and my greatest cheerleaders. I am forever grateful for the love and guidance you've bestowed upon me.
+
+With all my love and appreciation.
+\clearpage
+
+\section{Acknowledgements}
+I am grateful to Multimedia University of Kenya for giving me a chance to pursue Bachelor of Science in Computer Science. I wish to thank
+my classmates and the CIT staff for having contributed in formulation of ideas and for
+providing a suitable working environment towards the completion of this proposed work. In
+particular, I would like to thank Ms Otukana Yvette for having contributed much towards the
+formulation of this project idea and the guidance till end of the project.
+\clearpage
+
+\section{Abstract}
+\begin{itemize}
+\item The main aim of this project is to create a system that keeps records of
+public service vehicle (PSV) realtime statistics such as speed and location
+,insurance policy and all the safety features of the vehicle which are used in
+determining the safety level of a particular PSV.
+\item The main users of the system are the passengers and the law enforcement.
+Other key players in the system are drivers, conductors,vehicle owners, saccos and NTSA. Passengers enter the vehicles registration number before
+boarding to check the safety level of the vehicle and they can make mindful
+decisions based on the data that the system provides.
+
+\item Drivers, conductors and vehicle owners provide details that are linked to
+the repective vehicle(s)while the NTSA provides inspection reports of the
+vehicles. The system uses gps devices to get realtime location and speed
+of vehicles which is recorded and analysed and safety levels of a vehicle are
+determined.
+\item The system allows police officers to view the vehicles safety level and inspection report by entering the vehicles registration number and take apropriate
+actions.
+\item This system is built using Reactjs  java and springboot.
+\end{itemize}
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+\clearpage
+\thispagestyle{empty}
+\listoffigures
+\clearpage
+
+\pagenumbering{arabic}
+\chapter{Introduction}
+\section{Background of study}
+\noindent Public Transport plays a crucial role in the daily life of Kenyan citizens. The country relies majorly on public service vehicles (PSVs) to meet the commuter needs of
+diverse groups of people. This has led to an increase in passengers which in turn
+led to the necessity of increased motorization. Public transport in the country is
+driven by privately-owned vehicles, public service vehicles (PSV) popularly known
+as matatu, operating in the country following licensing through various licensing
+bodies. At present, a PSV is any vehicle that is licensed to ferry the public on
+Kenyan roads. This includes buses, mini-buses, vans, and mini-vans, 3-wheel motorcycles, motorcycles, taxis among others. The most popular category of PSV
+vehicles is the vans and mini-buses.\par
+\noindent Traditionally, Monitoring of safety of the PSVs is done by a serioes of manned
+rodblocks on the roads and occassional inspection by the NTSA. This system has
+been faced with loopholes which range from bribes and direct evation of roadblocks. This hs led to reckless driving and unroadworthy vehicles on the roads
+resulting to increased road accidents which have claimed lives of many passengers
+
+\section{Problem Statement}
+\noindent Road regulation enforcement is a difficult task considering the vast number of
+motorists contrasted with the low numbers of law enforcement officerscers. As such,
+a great deal of cooperation between road users, policymakers, road designers, and
+law enforcement is needed. The current approach to road traffic and safety places
+all responsibility on the road user as opposed to an integrated view as witnessed
+through initiatives like Zusha\par
+\noindent Police crackdowns on non-conforming drivers is a solution that causes more inconvenience to passengers than they do to those who disobey traffc laws. As noted
+PSV drivers frequently allege that they are subjected to abuse and/or harassment
+by the police for no other reason than to demand a bribe. Static checkpoint systems, the nation's primary monitoring technique, are another flaw in police. The
+drivers alert other drivers to impending checks by communicating with them or by previously being aware of the monitored zones. In this sense, it is challenging
+to measure irresponsible driving outside of the monitored zone.\par 
+\noindent Apart from insecurity, the majority of PSVs have placed very little emphasis on
+the comfort of their passengers, with behaviors ranging from vagrant insults to
+cramming people into small spaces without following rules. This hostility and
+unwillingness of the PSV crew to listen to passenger demands has led to an impediment of campaigns such as the zusha campaign.
+
+\section{Aim of Study}
+\noindent The aim of this study is to develop an online system that monitors realtime data
+from PSVs and determing the safety levels of the vehicle with a goal to increase the
+safety of the most vulnerable i.e the passengers and reduce road traffic accidents.
+
+\subsection{Research Objectives}
+\noindent
+\begin{enumerate}
+\item To design an online system that moniters public service vehicles.
+\item To Create an avenue for determining vehicle safety by passengers and the
+law enforcement
+\item Provide a platform that allows passengers to protest against recklessly driven
+vehicles.
+\item To develop a database that stores vehicle's safety details and drivinh history
+\end{enumerate}
+
+\section{Significance of the Study}
+\noindent Passenger safety and overall motorist safety has been a major challenge as evidenced by a large number RTAs .This study aims at providing a system that
+monitors the PSVs and provides information about specifc PSV to passengers.\par
+Furthermore, this study aims at providing law inforcment with information of
+recklessly driven vehicles outside of the monitored zones.\par
+The study will be crucial in creating a connection between passengers the PSV
+crew and the law enforcement.\par
+Ultimately, the signifficance of this study lies in its potential to catalyze positive
+change improving enforcement strategies, and promoting a culture of responsible road behavior, the study has the potential to save lives, reduce injuries, and
+contribute to the overall well-being and prosperity of the Kenyan population.
+
+\section{scope}
+Every project is done to achieve a set of goals with some conditions keeping in
+mind that it should be easy to use, feasible, and user-friendly. As the goal of
+this project is to develop an online PSV monitoring system ,this system will be
+designed keeping in mind the conditions (easy to use, feasible, and user-friendly)
+stated above.This is made possible through the use of a GeoLogger GPS data
+
+logger which records time-stamped records for latitude and longitude, the vehicle's
+speed, and the vehicle's heading. The GeoLogger has several features that made
+it desirable for this study. The device is powered by the vehicle's DC power
+system via the cigarette lighter or power outlet so that it operates only when the
+vehicle is turned on. It will help in determining the safety level of the PSVs and
+providing the information to the passengers and more detailed information to the
+law enforcement. This project aims to monitor PSVs beyond the monitered zones
+that are under speed-guns and roadblocks\par 
+\noindent The main scope and deliverable of the project would be to:
+\begin{itemize}
+\item Understand and prepare detailed requirement and specifications
+\item Prepare high level and detailed design specifcations for the system
+\item Prepare Test Plan and test cases
+\item Devlop the System and coding.
+\item Perfom unit Test
+
+\end{itemize}
+
+\section{Assumptions}
+\begin{itemize}
+\item \textbf{Acces:}It is assumed that passengers,drivers,conductors and law enforcement own a smartphone that will be used to access the system
+
+\item \textbf{Data Collection: }: It is assumed every PSV has the capacity to be fitted
+with gps trackers
+\item \textbf{Connectivity: }: The study assumes that users of the system have internet
+connection.
+\item \textbf{Enforcement effectiveness:} : It is assumed that improving road monitoring techniques, the system will lead to a reduction in RTAs and improved
+road safety outcomes.
+\end{itemize}
+
+\section{Limitations and Countermeasures}
+\noindent The study is subject to several limitations and challenges that may affect the reliability and generalizability of its findings. One such limitation pertains to the
+reliance on existing data sources, such as government reports and police records,
+which may suffer from inaccuracies, underreporting, or inconsistencies. To mitigate this limitation, the study will use APIs provided by the NTSA website mantain consistency in data being fed to the system\par
+\noindent Another challenge involves the potential for drivers and PSV crew to switch off
+or disconnect the gps trackers from the vehicles. To mitigate this, the systems
+employs the use of an OBD logger which provides separate data files for each
+key-on to key-off vehicle operating period. It also provides the start time for
+each operating period and the elapsed time between each record in an operating
+period.This data will be frequently monitered to maximize uptime and minimize downtime
+
+\chapter{Literature Review}
+\section{Background}
+\noindent Speeding and reckless driving pose significant threats to road safety, leading to
+a concerning number of accidents, injuries, and fatalities worldwide. In Kenya,
+like many other countries, public service vehicles (PSVs) are often at the forefront
+of these road safety challenges. The operation of PSVs in Kenya is a critical
+component of the country's transportation system, providing essential services to
+millions of commuters daily. However, the prevalence of speeding and reckless
+driving among PSV operators has contributed to a worrying trend of road traffic
+accidents, endangering the lives of passengers, pedestrians, and other road users.
+This literature review aims to explore the various systems implemented to curb
+accidents caused by speeding and reckless driving in PSVs operating in Kenya.
+By examining existing research, policies, and interventions, this review seeks to
+identify effective strategies and best practices which will be implemented by the
+system for improving commuter safety in the Kenyan context
+
+\section{Related Systems}
+\noindent Various sustems have been developed to streamline services in the road transport sector and morever the public transport sector. These systems are Traditional police crackdown through manned roadblocks across the country,use of speedguns ,frequent vehicle inspection by the NTSA and the fleet management systems that are used to manage Vehicles owned by a particular systems.\par
+\noindent Fleet management systems hepls in monitoring fuel consumption, maintenance schedules, and vehicle position and condition all contribute to cost control, equipment longevity, and a decrease in fatalities. It aids businesses in ensuring compliance, enhancing productivity, and lowering accidents. Applications for fleet management provide drivers more control over their cars.Fleet management services are less expensive than post-accident management organizations. For further advantages, we advise utilizing fleet management applications to measure all accident-related effects.However this systems focus majorly on the businss streamline without focusing on the safety of commuters \par
+\noindent Police crackdown through manned roadblocks across the country was meant to
+provide an avenue for the law enforcemnt to track down reckless drivers and unroadworthy vehicles . However this method has been filled with countless flaws
+from harrasment by the police officers to outright bribery which has led to the
+ineffeciency of this system. Moreover the matatu crew alert each other of a roadbloack or about a speed gun zone which leads to the difficulty in tracking down
+reckless driving out of monitered zones.\par 
+\noindent Introduction of campaigns such as the Zusha campaign has signifficantly hepled in
+reucing reckless driving in PSVs.This campaign give the commuters the voice to
+protest against recklessly driven vehicles. It is promoted by the use of mandatory
+stickers on the PSVs
+
+\section{Limitations of these systems}
+\noindent This systems have greatly improved the safety of commuters and reduction of road
+accidents greatly.However, they are greatly flawed as follows:
+\begin{itemize}
+\item Motorist familiarity with monitored zones and roadblock zones which hinders
+the monitering of reckless driving in unmonitored zones.
+\item Police bribery and harrasment of matatu crew due to lack of a defined system
+that clearly shows reckless driven
+\item Campaigns such as zusha have been rendered ineffecient due to hostility of the matatu crews who fail to loisten to commuter protest when the vehickes are being recklessly driven
+\item Ineffecient storage of vehicle inspection reports which has led to an increase
+in the number of unroadworthy public service vehicles
+
+\end{itemize}
+\section{Proposed solution}
+
+\noindent The public service vehicle safety management system provides a solution to the shortcomings of the traditional system by:
+\begin{itemize}
+\item The system collects realtime data such as speed, heading, longitude and
+lattitudes and timestamps them for anaysis.This is made possible by the use
+of GPS trackers and Geologger.
+\item The system keeps track of vehicle safety inspections reports, Vehicle crew
+details , insurance details, vehicle details and a vehicles calculated and analysed speeding history which are used to detrmine the safety level of the
+vehicle.
+\item This system allow commuters to view the details , vehicle data and speeding
+history of the vehicle to determine the safety level of the system and make
+mindful decisions.
+\item 
+\end{itemize}
+\chapter{Methodology}
+\section{Introduction}
+\noindent The Systems Development Life Cycle (SDLC) is a framework for describing the phases involved
+in developing and maintaining information systems.\par 
+\noindent \textbf{Predictive life cycle} in which the scope of the project can clearly be articulated and the schedule
+and cost can be predicted; and \textbf{ Adaptive Software Development} (ASD) life cycle in which
+requirements cannot be clearly expressed, projects are mission driven and component based,
+using time-based cycles to meet target dates \par 
+\noindent We are going to use an ASD life cycle model called Agile System Development Methodology
+for developing PSVSM system.
+
+\section{Agile System Development Methodology}
+\noindent Most agile methods attempt to minimize risk by developing software in short time boxes called
+Iterations. Software development being essentially a human activity will always have variations
+in processes and inputs and the model should be flexible enough to handle the variations \cite{schwaber2002}. The
+following are the characteristics of agile model that makes it suitable for PSVSM system development
+\begin{itemize}
+\item Iterative with short cycles enabling fast verifications and corrections.
+\item Time bound iterative cycles.
+\item Modularity at development process level.
+\item People oriented.
+\item Collaborative and communicative working style.
+\item Incremental and convergent approach that minimizes risks and facilitates functional additionals
+\end{itemize}
+\section{Overview}
+\noindent The scrum method is incremental, with each increment called a sprint, each sprint is
+recommended to last for 4 weeks. Before the sprint there is a planning meeting for each sprint,
+where a customer decides which features should be implemented in the upcoming sprint. During
+the sprints the teams meets on a daily basis on short meetings called scrum. A sprint review
+meeting is held at the end of each sprint, and the customer is able to see the existing
+accomplishments for the preceding sprint. Teams can also hold sprint retrospective meetings to,
+where they can look at the process and then try to find out what went right and what can be
+improved. The figure bellow shows the flow of the methods
+
+\begin{figure}[h]
+\centering
+  \includegraphics[width=0.5\textwidth]{/home/bram/Documents/psvm-v1/Scrum_Agile_events.png}
+  \caption{Agile model }
+  \label{fig:agile model}
+\end{figure}
+
+\section{Scrum artifacts}
+\noindent Scrum being an agile method, follows that the formality of the project is as low as possible, it
+thus facilitated necessary changes to be made to the project. The customer is also able to see the
+project progress since this improves their motivation and involvement. Artifacts of scrum
+includes:
+\begin{itemize}
+\item The product backlog
+\item The sprint backlog
+\item The sprint burndown chart.
+\item The impediment lists
+
+\end{itemize}
+\subsection{The Product Backlog} 
+It can be considered equivalent to the requirement specifications, but it has one big difference in
+that it does not entail long description of each requirement, it has only single sentence
+description for each requirement. Being a list of such single sentence requirements, it is thus the
+customer’s priority to keep it prioritized and updated. The customer can add requirements to the
+list and the team is then responsible for providing estimates of how long the implementation
+might take.
+
+\subsection{The Sprint Backlog} 
+It is a list of tasks maintained and compiled by the team based on he the items in the product
+backlog, initially selected to be part of the sprint. The list is similar to the product backlog, but
+with a big difference. The items on the product backlog are features requested by the user, the
+sprint backlog is a list of tasks the developers must do to implement the items that the customer
+chose from the product backlog. The customer does not need to know about the items on the
+sprint backlog.
+A general rule of thumb is that the tasks on the sprint backlog should always be relatively short,
+that is between one hour and two days.
+\subsection{The Sprint Burn down Chart} 
+This measures the progress of the sprint instead of the project. It is important because it helps the
+team discover tasks they did not consider but that must be added to the sprint backlog. Since the
+chart displays the amount of work remaining and not the amount of work completed, the graph
+can in fact increase from one day to the next.
+\subsection{Impediment list} 
+An impediment is anything holding back development in some way or another. It is the scrum
+master’s responsibility to deal with any such impediments. The list is simply a set of tasks that
+the scrum master uses to track the impediments that needs to be solved.
+\subsection{The Sprint Planning Meeting} 
+In the first session, the Customer chooses high priority items from the product backlog that
+should be completed in the upcoming Sprint. The customer explains the items to the team and
+they give an estimate on how long it will take to complete it. The sprint backlog is filled so that
+the sum of the item estimates is about the same as the available work time of the team during the
+upcoming sprint.
+\subsection{The Daily Activities} 
+During the sprint, the developers work on the items in the sprint backlog. Every day the
+developers synchronize their progress in a daily Scrum meeting that should last no longer than
+15 minutes. During the meeting, all the developers will tell the others what they did since the last
+Scrum, if there are any impediments obstructing their work and what they are planning on doing
+until the next Scrum. Another important day-to-day activity is updating the sprint backlog and
+burn down chart.
+\subsection{Sprint Review Meeting} 
+At the end of the sprint, the team meets with the customer and presents the result of the sprint.
+The users demonstrate the functionality they have completed and gets feedback from the
+customer. If the demonstrated functionality is what the customer wanted, then this gives the team
+a feeling of accomplishment as well as the customer a proof that the project is moving in the
+right direction. If the demonstrated functionality is not quite what the customer was looking for it
+is now easy to explain how it is different and what should be done next. In some cases, it is
+enough to make a few changes while in other cases the implemented functionality must be
+discarded.
+
+\subsection{Sprint Retrospect Meeting} 
+The intention of this meeting is to help the team improve their development process. The team,
+the scrum master and the customer (optional) attend the meeting. During the meeting, the team
+members take turns saying what went well during the last sprint, and what could be improved.
+After all team members have had their say, they prioritize the possible improvements and discuss
+them in order. The meeting should not last more than 3 hours.
+\subsection{Project Startup} 
+Ken Schwaber has had much success with his kick starting of Scrum projects as described in the
+book Agile Project Management with Scrum (Schwaber, 2002). This process goes as follows.
+The Scrum Master works with the customer and prepares a backlog. Then the Scrum Master, the
+Customer and the Team uses one day to go over this backlog. During this first day the customer
+explains the items in the backlog to the team, and the team estimates how much work it would
+take to implement this. The customer then prioritizes the items in the backlog and divides the
+backlog items into sprints. The following day is the first day of the first sprint. This first sprint
+isn’t very different from the following sprints, except that the first part of the sprint planning
+meeting has already been completed.
+\section{Advantages of Agile} 
+i. Customer satisfaction
+ii. Allows changes to be made.
+iii. Deliver a working software frequently, ranging from a few weeks to a few months,
+considering shorter time-scale.
+iv. Promotes collaboration
+v. Provides motivation between individual team members.
+vi. Allows face-to-face Conversation
+vii. Measure the Progress as per the Working Software.
+viii. Maintain Constant Pace
+ix. Monitoring - Pay regular attention to technical excellence and good design to enhance
+agility.
+x. Simplicity - Keep things simple and use simple terms to measure the work that is not
+completed.
+xi. Review the Work Regularly
+\section{Disadvantages of Agile} 
+i. Limited support for distributed development environments.
+ii. Limited support for subcontracting.
+iii. Limited support for developing large, complex software.
+iv. Limited support for development involving large teams.
+
+\chapter{System Analysis}
+\section{Introduction}
+Upon the completion of the Public service Vehicle Safety Managenemt System, there are a number of
+things that will be expected of it not only by the prospected users, but also for the administrator
+of the system. These will therefore form the requirements of the Public service Vehicle Safety Managenemt System and will be broadly classified in to the system requirements, functional
+requirements and the Non-functional requirements.
+
+\section{ System Requirements}
+\subsection{Software Requirements Specification}
+A set of programs associated with the operation of a computer is called software. Software is the
+part of the computer system, which enables the user to interact with several physical hardware
+devices.\par 
+The minimum software requirement specifications for developing this project are as follows:
+\begin{itemize}
+\item \textbf{Operating system: }windows,linux
+\item \textbf{Presentation:}Reactjs, Axios, bootstrap ,apache tomcat, google maps API,browser, java 17
+\item \textbf{Database:} mariadb
+\item \textbf{documentation: }LaTex
+
+\end{itemize}
+\subsection{Hardware Requirements Specification}
+The collection of internal electronic circuits and external physical devices used in building a
+computer is called the Hardware. The minimum hardware requirement specifications for
+developing this project are as follows:
+\begin{itemize}
+\item \textbf{ Processor:} Standard processor with a speed of 1.6 GHz or more
+\item \textbf{RAM:}  256 MB RAM or more
+\item \textbf{Hard Disk:}  20 GB or more
+\item \textbf{Monitor:}  Standard color monitor
+\item \textbf{Keyboard:}  Standard keyboard
+\item \textbf{Mouse:} Standard mouse
+\end{itemize}
+
+\section{Functional Requirements}
+\begin{enumerate}
+\item Security; to ensure confidentiality, integrity and availability
+\item Administrative functions
+\item Authentication
+\item Authorization levels
+\item External interfaces
+\item Historical data
+\item Legal and regulatory requirement
+\item Transaction corrections, adjustments and cancellations
+\end{enumerate}
+
+\section{Non Functional Requirements}
+\subsection{Reliability Requirements}
+The system must perform request accurately for reliability. For example, when the
+vehicle owner saves the edited details of the vehicle , after he reviews the details later, they must be
+changed according to the latest details that was updated. Moreover, the client is not allowed to
+view the details that the administrator has. Besides that, the login form will have validity check
+to ensure that only the authorized users gain access to the system.
+\subsection{Usability Requirements}
+This system should be user-friendly and easy to use so that users can perform their tasks easily.
+\subsection{Implementation Requirements}
+In the implementation of this system, we use React Js which is the frontend.\par 
+The backend which hold the bussiness logic of the application is built using Java with springboot framework. Data from the bussiness logic is stored in Mariadb.The frontend and backend are linked using Axios.
+
+\section{Technologies Used}
+\subsection{MariaDB}
+\noindent We started out with the intention of using the Mariadb database system to connect to our tables
+using our own fast low-level routines. This resulted in a new SQL interface to our database but
+with almost the same API interface as Mariadb.
+The following list describes some of the important characteristics of the mariadb Database
+Software that made us prefer it for PSVSM system to other databases.\par 
+\indent \textbf{features}
+\begin{enumerate}
+  \item \textbf{High Performance}: MariaDB often exhibits better performance than its counterparts due to its advanced optimization techniques and storage engines like Aria and InnoDB.
+  
+  \item \textbf{Open Source}: Being open source, MariaDB is free to use and has a large community contributing to its development and support.
+  
+  \item \textbf{Compatibility}: MariaDB is designed as a drop-in replacement for MySQL, making it easy to switch from MySQL to MariaDB without significant changes to applications or databases.
+  
+  \item \textbf{Advanced Features}: MariaDB offers many advanced features like JSON support, temporal data tables, and dynamic columns, enhancing its functionality for modern database needs.
+  
+  \item \textbf{Security Enhancements}: MariaDB provides enhanced security features such as roles-based access control, encryption at rest and in transit, and plugin authentication for improved data protection.
+\end{enumerate}
+
+\subsection{Springboot}
+\noindent Springboot is the main framework that I used to create the backend. It provides out of the box features that make development of APIs faster. Here are some features that made it a prefered solution for this project:
+\begin{enumerate}
+  \item \textbf{Rapid Development}: Spring Boot provides a set of pre-configured components and conventions that allow developers to quickly set up and start developing applications without dealing with boilerplate configuration.
+  
+  \item \textbf{Microservices Architecture Support}: Spring Boot is well-suited for building microservices-based architectures, providing features like embedded servers, dependency management, and configuration.
+  
+  \item \textbf{Auto-configuration}: Spring Boot automatically configures many components based on classpath dependencies, reducing the need for manual configuration.
+  
+  \item \textbf{Embedded Servers}: Spring Boot allows embedding servlet containers like Tomcat, Jetty, or Undertow directly within the application, simplifying deployment and reducing overhead.
+  
+  \item \textbf{Production-Ready}: Spring Boot offers production-ready features such as health checks, metrics, and externalized configuration, facilitating the deployment and management of applications in production environments.
+\end{enumerate}
+
+howevermuch springboot maybe good for development, it has its own challenges which are listed below \par 
+\begin{enumerate}
+  \item \textbf{Steep Learning Curve}: Spring Boot's extensive features and configurations can lead to a steep learning curve for beginners.
+  
+  \item \textbf{Complexity}: While Spring Boot simplifies the setup of Spring applications, it can still introduce complexity, especially in larger projects where understanding the underlying configurations becomes necessary.
+  
+  \item \textbf{Overhead}: Spring Boot's auto-configuration feature may lead to unnecessary overhead, especially in smaller projects where simpler frameworks could suffice.
+  
+  \item \textbf{Magic Behind Auto-Configuration}: Although Spring Boot's auto-configuration is convenient, it might be challenging to debug issues or understand the underlying configuration decisions made by the framework.
+  
+  \item \textbf{Limited Flexibility}: While Spring Boot offers a wide range of features, its opinionated approach might limit flexibility for developers who prefer more control over their application's configuration.
+\end{enumerate}
+\subsection{React JS}
+\noindent React.js is a popular JavaScript library for building user interfaces, developed by Facebook. It is renowned for its component-based architecture, which allows developers to build reusable UI components and compose complex user interfaces efficiently.
+ React.js is a powerful library for building interactive and dynamic user interfaces, offering benefits such as a component-based architecture, virtual DOM for efficient rendering, declarative syntax for clarity, and a rich ecosystem with extensive community support.Some of the Advantaeges of React Js are listed below:
+ 
+\begin{enumerate}
+    \item \textbf{Component-based Architecture}: React.js follows a component-based architecture, which allows for the creation of reusable UI components. This is advantageous in a project like yours where there might be various modules and elements that need to be reused across different parts of the system, such as displaying vehicle information, safety statistics, etc.
+    
+    \item \textbf{Virtual DOM}: React.js utilizes a virtual DOM, which efficiently updates only the necessary parts of the actual DOM when data changes. In a real-time system like yours where vehicle data is constantly changing, this can lead to improved performance and responsiveness.
+    
+    \item \textbf{Declarative Syntax}: React.js uses a declarative syntax, making it easier to understand and maintain code. This is beneficial for developers working on the project, as it reduces cognitive load and helps in quickly identifying and fixing issues.
+    
+    \item \textbf{Large Ecosystem and Community Support}: React.js has a large ecosystem of libraries, tools, and resources available, along with a vast community of developers. This provides access to a wide range of pre-built components, middleware, and solutions that can expedite development and enhance the functionality of your system.
+\end{enumerate}
+
+
+\chapter{System Design}
+\section{Architectural Design} 
+PSVSM system uses three-tier architecture. Three-tier architecture is a client-server architecture
+in which the functional process logic, data access, computer data storage and user interface are
+developed and maintained as independent modules on separate platforms. Three-tier architecture
+is a software design pattern and well-established software architecture
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.3\textwidth]{/home/bram/Documents/psvm-v1/architecture-diagram.drawio.png} % Replace 'example-image' with your image file name
+  \caption{PSVSM client serve architecture} % Caption for the figure
+  \label{fig:psvsm structure} % Label for cross-referencing
+\end{figure}
+\section{logic design}
+\subsection{Behavioural Description}
+\textbf{Dataflow}
+
+
+\textbf{Context Level DFD}\par
+\noindent In the Context Level, the whole system is shown as a single process.
+Figure below illustrates PSVSM context level DFD showing Inputs to the overall system and
+outputs from the overall system shown together with their destinations.
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.8\textwidth]{/home/bram/Documents/psvm-v1/psvsms-context-diagram.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Context Level DFD} % Caption for the figure
+  \label{fig:context level DFD} % Label for cross-referencing
+\end{figure}
+
+\textbf {Top-Level DFD} \par
+\noindent The Top Level DFD gives the overview of the whole system identifying the major system
+processes and data flow. Figure below shows PSVSM system Top level DFD illustrating what the
+system does in more detail.
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/Top-level-DFD.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Top Level DFD} % Caption for the figure
+  \label{fig:Top level DFD} % Label for cross-referencing
+\end{figure}
+
+\subsection{UseCase documentation}
+\noindent The use case diagram show the relationship between actors and entities in the system. The diagram below shows the general use case of users, drivers, conductors and vehicle owners
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/UserUsecase.drawio.png} % Replace 'example-image' with your image file name
+  \caption{General Usecase diagram} % Caption for the figure
+  \label{fig:General usecase diagram} % Label for cross-referencing
+\end{figure}
+\par
+\textbf{vehicle owner usecase diagram}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/owners.usecase.png} % Replace 'example-image' with your image file name
+  \caption{Owners Usecase diagram} % Caption for the figure
+  \label{fig:vehicle owners usecase diagram} % Label for cross-referencing
+\end{figure}
+\par 
+\textbf{\underline{Commuters Usecase diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/users-commuter-usecase.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Commuters Usecase diagram} % Caption for the figure
+  \label{fig:Comuters usecase diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\textbf{\underline{Inspectors use case diagram}}\par
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/users-commuter-usecase.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Inspector Usecase diagram} % Caption for the figure
+  \label{fig:Inspector usecase diagram} % Label for cross-referencing
+\end{figure}
+\subsection{Class diagram Documentation}
+\noindent Creating documentation for a class diagram involves explaining the purpose of each class, its attributes, methods, relationships with other classes, and any additional information necessary for understanding the design. Here's a comprehensive overview of the PSVSMs  class diagram:
+\par
+\textbf{\underline{Class diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/psvms-system-class.drawio.png} % Replace 'example-image' with your image file name
+  \caption{System class diagram} % Caption for the figure
+  \label{fig:Class diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\subsection{Process flow}
+\subsubsection{Activity Diagrams}
+\noindent Activity diagrams show the flow of activities in the sytem.The following diagrams show user activity in the system.\par
+\textbf{\underline{Vehicle Owners actvity diagram}}\par
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.8\textwidth]{/home/bram/Documents/psvm-v1/Owner-activity-diagram.drawio.png} % Replace 'example-image' with your image file name
+  \caption{vehicle Owner activity diagram} % Caption for the figure
+  \label{fig:owners activity diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+
+\textbf{\underline{Commuters activity diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=1\textwidth]{/home/bram/Documents/psvm-v1/Commuters-activity.drawio.png} % Replace 'example-image' with your image file name
+  \caption{commuters activity diagram} % Caption for the figure
+  \label{fig:commuters activity diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\textbf{\underline{Inspector activity diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=1\textwidth]{/home/bram/Documents/psvm-v1/Inspector-activity.drawio.png} % Replace 'example-image' with your image file name
+  \caption{Inspector activity diagram} % Caption for the figure
+  \label{fig:Inspector activity diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\textbf{\underline{crew activity diagram}}
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=1\textwidth]{/home/bram/Documents/psvm-v1/crew-activity.drawio.png} % Replace 'example-image' with your image file name
+  \caption{crew activity diagram} % Caption for the figure
+  \label{fig:crew activity diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+\subsubsection{Sequence Diagram}
+\noindent A sequence diagram is an interaction diagram that emphasizes the time ordering of messages.
+Graphically, a sequence diagram is a table that shows objects arranged along x-axis and
+messages, ordered in increasing time, along the y-axis
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=1\textwidth]{/home/bram/Documents/psvm-v1/user-sequence.drawio.png} % Replace 'example-image' with your image file name
+  \caption{user sequence diagram} % Caption for the figure
+  \label{fig:user sequence diagram} % Label for cross-referencing
+\end{figure}
+\clearpage
+
+
+\section{Database Design}
+\noindent Entity-Relationship Diagram (ERD) is a type of database design tool used to visually represent the logical structure of a database.
+An ERD consists of entities, attributes, and relationships. Entities represent real-world objects or concepts  that are stored in the database. Attributes are the properties or characteristics of entities . Relationships describe how entities are related to each other.\par
+\textbf{\underline{Entity Relationship Diagram}}
+\par
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/psvsm-erd.drawio.png} % Replace 'example-image' with your image file name
+  \caption{entity relationship diagram} % Caption for the figure
+  \label{fig:ERD} % Label for cross-referencing
+\end{figure}
+\clearpage
+\section{User Interface Design}
+\noindent User Interface (UI) design is the process of creating interfaces in software or computerized devices with a focus on looks or style. It encompasses everything users interact with on a screen, including images, sliders, buttons, text, input fields, and all interactive elements. Here's a comprehensive overview of the UI design process\par
+\textbf{\underline{home UI design}}\par 
+\par
+\begin{figure}[h] % 'h' tells LaTeX to place the figure 'here'
+  \centering
+  \includegraphics[width=0.7\textwidth]{/home/bram/Documents/psvm-v1/UI design.png} % Replace 'example-image' with your image file name
+  \caption{User Interface Design} % Caption for the figure
+  \label{fig:UI design} % Label for cross-referencing
+\end{figure}
+\chapter{Implementation and Testing}
+\section{Development environment}
+\subsection{Technologies Used}
+\begin{itemize}
+  \item \textbf{Java}: Java is used for backend development due to its robustness, platform independence, and extensive libraries and frameworks support.
+  \item \textbf{Spring Boot}: Spring Boot is chosen as the backend framework for its rapid development capabilities, dependency management, and support for building microservices.
+  \item \textbf{React.js}: React.js is employed for frontend development to create dynamic and interactive user interfaces with its component-based architecture and virtual DOM.
+  \item \textbf{Axios}: Axios is used as the HTTP client for making asynchronous HTTP requests from the frontend to the backend API implemented in Spring Boot.
+  \item \textbf{MariaDB}: MariaDB is selected as the relational database management system for its compatibility with MySQL, performance optimizations, and open-source nature.
+\end{itemize}
+\subsection{Backend Development}
+\begin{itemize}
+  \item \textbf{IDE}: IntelliJ IDEA is used as the Integrated Development Environment (IDE) for Java development, providing features such as code completion, refactoring, and debugging.
+  \item \textbf{Build Tool}: Apache Maven is utilized as the build automation tool for managing dependencies, compiling code, and packaging the application.
+  \item \textbf{Spring Boot Starter}: The project is initialized using Spring Initializr to bootstrap a Spring Boot application with necessary dependencies like Spring Web, Spring Data JPA, and MariaDB Driver.
+  \item \textbf{Database Setup}: MariaDB is installed and configured locally for development purposes. Database schema and tables are created using SQL scripts or Hibernate ORM entities.
+  \item \textbf{Backend Server}: Spring Boot's embedded Tomcat server is used for running the backend application locally during development.
+\end{itemize}
+\subsection{Frontend Development}
+\begin{itemize}
+  \item \textbf{Node.js and npm}: Node.js and npm (Node Package Manager) are installed to manage frontend dependencies and run development scripts.
+  \item \textbf{Create React App}: Create React App is used to scaffold a new React.js project with a predefined directory structure, webpack configuration, and development server setup.
+  \item \textbf{React Components}: UI components are developed using React.js, following best practices such as functional components, hooks, and component composition.
+  \item \textbf{State Management}: React's built-in state management capabilities are utilized for managing component state, and if needed, Redux or Context API can be integrated for global state management.
+  \item \textbf{Styling}: CSS modules, SASS, or styled-components are employed for styling React components, providing modularity and scoped styles.
+  \item \textbf{Development Server}: The frontend application is served locally using the webpack development server, enabling hot reloading and rapid iteration during development.
+\end{itemize}
+\subsection{Collaboration and Version Control}
+\begin{itemize}
+  \item \textbf{Version Control}: Git is used for version control, allowing collaboration among team members, tracking changes, and managing codebase versions.
+  \item \textbf{Git Hosting Platform}: GitHub, GitLab, or Bitbucket are utilized as the hosting platforms for the Git repositories, providing features like pull requests, code reviews, and issue tracking.
+  \item \textbf{Agile Methodology}: Agile development methodologies such as Scrum or Kanban are adopted for project management, enabling iterative development, frequent releases, and responsiveness to changing requirements.
+  \item \textbf{Communication Tools}: Communication tools like Slack, Microsoft Teams, or Discord are used for real-time communication, collaboration, and coordination among team members.
+\end{itemize}
+\subsection{Testing and Quality Assurance}
+\begin{itemize}
+  \item \textbf{Unit Testing}: JUnit and Mockito are employed for writing unit tests for backend Java code, ensuring code reliability and facilitating automated testing.
+  \item \textbf{Integration Testing}: Integration tests are conducted to verify the interaction between different components of the system, including frontend components, backend API endpoints, and database operations.
+ 
+\end{itemize}
+\section{Tesing}
+\noindent Testing is defined as the process in which defects are identified, isolated, subjected for
+rectification and ensured that product is defect free in order to produce the quality product and
+hence customer satisfaction.
+\subsection{Testing Methodology}
+White box Testing: is the testing process in which tester can perform testing on an application
+with having internal structural knowledge. Usually The Developers are involved in white box
+testing. We as the developers of SCMMS applied white box testing as our testing methodology.
+
+\subsection{STLC (Software Testing Life Cycle)}
+
+\subsubsection*{Test Planning}
+\begin{itemize}
+    \item While planning for testing of SCMMS system, we identified objectives of the test, areas that needed to be tested, areas that were not to be tested, and Scheduling Resource Planning.
+\end{itemize}
+
+\subsubsection{Test Development}
+\begin{itemize}
+    \item In the test development, we prepared a checklist (Test case Development) and the description of the test cases (Test Procedure preparation).
+\end{itemize}
+
+\subsubsection{Test Execution}
+\begin{itemize}
+    \item Test execution phase of SCMMS involved implementation of test cases and observing the result of the test.
+\end{itemize}
+
+\subsubsection{Result Analysis}
+\begin{itemize}
+    \item Result analysis of testing SCMMS system contained Expected value: behavior of the system and Actual value: actual behavior of the system.
+\end{itemize}
+
+\subsubsection{Bug Tracing}
+\begin{itemize}
+    \item We collected all the failed cases and prepared related documents.
+\end{itemize}
+
+\subsubsection{Reporting}
+\begin{itemize}
+    \item The results of the test.
+\end{itemize}
+\subsection{Types of Testing}
+
+\subsubsection{Smoke Testing}
+\begin{itemize}
+    \item We performed an initial test on SCMMS system for the availability of all the functionalities.
+\end{itemize}
+
+\subsubsection{Sanity Testing}
+\begin{itemize}
+    \item We then conducted an initial test on the system to check for the proper behavior of an application.
+\end{itemize}
+
+\subsubsection{Regression Testing}
+\begin{itemize}
+    \item During the project, we carried out several tests on functionalities that we tested before whenever we made a change to the existing functionality.
+\end{itemize}
+
+\subsubsection*{Adhoc Testing}
+\begin{itemize}
+    \item We performed an Adhoc test (positive and negative) to perform GUI testing.
+\end{itemize}
+\section{TCD (Test Case Document)}
+
+\subsection{Test Scope}
+This involved the areas of the system to be tested including homepage, fund seeker dashboard and projects dashboard.
+
+\subsection{Test Scenario}
+Our test scenario for the system included when the fund seeker fills in the application form, upload documents and hit the quit button.
+
+\subsection{Test Procedure}
+Positive testing, Negative testing using the corresponding GUI test cases, helped us in performing adhoc testing.
+
+\section{Test Cases}
+
+\subsection{Positive Test Cases}
+The positive flow of the functionality was considered, valid inputs were used for testing and expected value was positive to verify whether the requirements are justified. Table 1 below shows SCMMS positive test case.
+\begin{center}
+\begin{tabular}{|c|p{3cm}|c|c|c|}
+\hline
+Test Case Number & Description & Expected Value & Actual Value & Result \\
+\hline
+1 & check for all features in the screen& must contain all the features & pass & Pass \\
+2 & Enter valid Username and Password& It should accept & Pass & Pass \\
+
+\hline
+\end{tabular}
+\end{center}
+\par
+\clearpage
+\subsection{Negative Test Case}
+\noindent Must have negative perception and invalid inputs must be used for test.
+Table  below describes PSVSMs negative test case\par
+\begin{center}
+\begin{tabular}{|c|p{3cm}|c|c|c|}
+\hline
+Test Case Number & Description & Expected Value & Actual Value & Result \\
+\hline
+1 & Try to modify vehicle& should not allow & pass & Pass \\
+2 & Enter invalid Username and Password& It should not accept & Pass & Pass \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\section{System Implementation}
+
+It is the process of ensuring that the information system is operational, and then allowing users to take over its operation for use and evaluation. Implementation of PSVSMS includes activities such as:
+
+\begin{enumerate}
+    \item Training of end users how the whole system operates and the functionalities of the system
+    \item Completion of user documentation
+    \item System changeover
+    \item Evaluation of the system on regular intervals
+\end{enumerate}
+
+\chapter{Results and Conclusion}
+\section{Achievements}
+\begin{itemize}
+    \item Real-time Data Integration: Successfully integrating GPS devices to capture real-time location and speed data of public service vehicles (PSVs) is a significant achievement. This allows for accurate tracking and monitoring of vehicles.
+    \item Comprehensive Record Keeping: Building a system that records detailed information such as insurance policies, safety features, and inspection reports contributes to better safety management of PSVs. It ensures that all necessary data is accessible and organized.
+    \item User-Friendly Interface: Developing a user interface that is accessible to both passengers and law enforcement officers is crucial. Achieving a user-friendly design that allows passengers to easily access safety information by entering the vehicle registration number enhances user experience and promotes safety awareness.
+    \item Integration with External Parties: Successfully integrating data provided by various stakeholders such as drivers, conductors, vehicle owners, SACCOs, and the National Transport and Safety Authority (NTSA) demonstrates effective collaboration and data management within the transportation ecosystem.
+\end{itemize}
+
+\section{Lessons Learned}
+\begin{itemize}
+    \item Data Security: Ensuring the security and privacy of sensitive data, such as vehicle details and inspection reports, is paramount. Implementing robust security measures, including encryption and access controls, helps prevent unauthorized access and data breaches.
+    \item Scalability: As the system grows and more vehicles are added, scalability becomes a key consideration. Designing the system architecture with scalability in mind allows for smooth expansion without compromising performance.
+    \item User Training and Support: Providing adequate training and support for users, especially law enforcement officers who rely on the system for regulatory enforcement, is essential. Clear documentation and ongoing support help users effectively utilize the system and address any issues that may arise.
+    \item Feedback Mechanism: Establishing a feedback mechanism for passengers and other stakeholders can provide valuable insights for continuous improvement. Soliciting feedback on the usability and effectiveness of the system allows for iterative enhancements based on user needs and preferences.
+    \item Technology Stack Optimization: Continuously evaluating and optimizing the technology stack, including frameworks like ReactJS, Java, MariaDB, and Spring Boot, helps ensure optimal performance and efficiency of the system. Keeping abreast of advancements in technology allows for incorporating new tools and techniques to enhance system capabilities.
+\end{itemize}
+\chapter{Appendix}
+\bibliographystyle{plain}
+\bibliography{psvm}
+
+
+\end{document}
