@@ -43,7 +43,15 @@ public class ConductorServiceImpl implements ConductorService {
         newcConductor.setEmail(conductor.getEmail());
         newcConductor.setPassword(passwordEncoder.encode(conductor.getPassword()));
         
-        repository.save(newcConductor);
+        Optional<Conductor> existConductor=repository.findById(conductor.getIdNumber());
+        if (existConductor.isPresent()) {
+            return "conductor exists";
+            
+        }
+        else{
+            repository.save(newcConductor);
+        }
+        
         return "Conductor added successfully";
       
     }

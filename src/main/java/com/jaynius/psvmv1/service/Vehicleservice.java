@@ -15,8 +15,9 @@ public interface Vehicleservice {
      ResponseEntity<Vehicle> findVehicleByRegistration(String registrationNumber);
      ResponseEntity<Vehicle> updateVehicleByRegistration(Vehicle vehicle,String registrationNumber);
      ResponseEntity<Vehicle> deleteVehicleByRegistration(String registrationNumber);
-     ResponseEntity<List<Vehicle>> findAllVehicles();
+     List<Vehicle> findAllVehicles();
      ResponseEntity<Set<Vehicle>> findVehicleByOwnerId(String idNumber);
+     Integer countOfVehicles();
     
      
 

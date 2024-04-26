@@ -56,8 +56,17 @@ public class UserController {
     }
 
     @GetMapping("/count")
-    public ResponseEntity<Integer> countUsers(){
+    public Integer countUsers(){
         return service.countUsers();
     }
 
+    @PatchMapping("/location/{idNumber}")
+    public ResponseEntity<Users> setUserLocation(@PathVariable String idNumber,@RequestBody Users user){
+        return service.assignLocation(idNumber, user);
+    }
+
+    @GetMapping("/login")
+    ResponseEntity<?> userLogin(@PathVariable String idNumber,@PathVariable String password){
+        return service.userLogin(idNumber, password);
+    }
 }

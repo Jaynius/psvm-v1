@@ -3,6 +3,8 @@ package com.jaynius.psvmv1.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.NaturalId;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,7 +22,11 @@ import lombok.NoArgsConstructor;
 public class Inspector {
     @Id
     private String idNumber;
-    private String name,email,contacts,password;
+    private String name;
+    
+    @NaturalId(mutable = true)
+    private String email;
+    private String contacts,password;
 
        @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

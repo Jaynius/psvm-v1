@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.jaynius.psvmv1.service.Vehicleservice;
 
 @RestController
 @RequestMapping("/vehicles")
+@CrossOrigin
 public class VehicleController {
 
     private final Vehicleservice service;
@@ -43,14 +45,19 @@ public class VehicleController {
         return service.deleteVehicleByRegistration(registrationNumber);
     }
 
-    @GetMapping("/vehicles")
-    public ResponseEntity<List<Vehicle>> findAllVehicles(){
+    @GetMapping("/all")
+    public List<Vehicle> findAllVehicles(){
         return service.findAllVehicles();
     }
 
     @GetMapping("/vehicle/owner/{idNumber}")
     public ResponseEntity<Set<Vehicle>> findVehicleByOwnerId(String idNumber){
         return service.findVehicleByOwnerId(idNumber);
+    }
+
+    @GetMapping("/count")
+    public Integer countOfVehicles(){
+        return service.countOfVehicles();
     }
 
 }

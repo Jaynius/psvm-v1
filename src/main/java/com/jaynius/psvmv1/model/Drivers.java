@@ -1,5 +1,7 @@
 package com.jaynius.psvmv1.model;
 
+import org.hibernate.annotations.NaturalId;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -21,7 +23,10 @@ import lombok.Setter;
 public class Drivers {
     @Id
     private String idNumber;
-    private String name, contacts, email;
+    private String name, contacts;
+
+    @NaturalId(mutable = true)
+    private String  email;
     private String password;
 
     @OneToOne

@@ -17,7 +17,10 @@ public interface UsersService {
     ResponseEntity<Users> deleteUserById(String idnumber);
     ResponseEntity<List<Users>> findAllUsers();
     ResponseEntity<Users> assignUserToVehicle(String idNumber, String registrationNumber);
-    ResponseEntity<Integer> countUsers();
+    Integer countUsers();
+    ResponseEntity<Users> assignLocation(String idNumber,Users user);
+    ResponseEntity<?> userLogin(String idNumber, String password);
+
 
 
 }

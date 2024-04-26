@@ -86,14 +86,14 @@ public class VehicleServiceImpl implements Vehicleservice{
     }
 
     @Override
-    public ResponseEntity<List<Vehicle>> findAllVehicles() {
+    public List<Vehicle> findAllVehicles() {
        List<Vehicle> vehicleList=new ArrayList<>();
        repository.findAll().forEach(vehicleList::add);
        if (vehicleList.isEmpty()) {
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return null;
         
        }
-       return new ResponseEntity<>(vehicleList,HttpStatus.FOUND);
+       return vehicleList;
     }
 
     @SuppressWarnings("null")
@@ -108,6 +108,20 @@ public class VehicleServiceImpl implements Vehicleservice{
         
        }
        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public Integer countOfVehicles() {
+       int count=0;
+       List<Vehicle> vehicleList=new ArrayList<>();
+       repository.findAll().forEach(vehicleList::add);
+       if (vehicleList.isEmpty()) {
+        return null;
+        
+       }
+       count=vehicleList.size();
+       return count;
+
     }
 
 

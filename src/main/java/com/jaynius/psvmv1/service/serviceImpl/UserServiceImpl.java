@@ -47,7 +47,7 @@ public class UserServiceImpl implements UsersService {
 
     @Override
     public ResponseEntity<Users> findUserById(String idnumber) {
-        @SuppressWarnings("null")
+    
         Optional<Users> user=repository.findById(idnumber);
         if (user.isPresent()) {
             return new ResponseEntity<>(user.get(),HttpStatus.FOUND);
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UsersService {
 
     @Override
     public ResponseEntity <Set<Users>> findUsersByVehicle(String registrationNumber) {
-       @SuppressWarnings("null")
+    
     Optional<Vehicle> optionaVehicle=vRepository.findById(registrationNumber);
        if (optionaVehicle.isPresent()) {
         Vehicle vehicle=optionaVehicle.get();
@@ -90,7 +90,6 @@ public class UserServiceImpl implements UsersService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Users> deleteUserById(String idnumber) {
         Optional<Users> user=repository.findById(idnumber);
@@ -130,7 +129,7 @@ public class UserServiceImpl implements UsersService {
     }
 
     @Override
-    public ResponseEntity<Integer> countUsers() {
+    public Integer countUsers() {
        int count=0;
          List<Users> userList=new ArrayList<>();
             repository.findAll().forEach(userList::add);
@@ -138,7 +137,35 @@ public class UserServiceImpl implements UsersService {
                 return null;
             }
             count=userList.size();
-            return new ResponseEntity<>(count,HttpStatus.FOUND);
+            return count;
+    }
+
+    @Override
+    public ResponseEntity<Users> assignLocation(String idNumber, Users user) {
+        Optional<Users> optionalUser=repository.findById(idNumber);
+        if (optionalUser.isPresent()) {
+            Users updateUsers=optionalUser.get();
+            updateUsers.setLatitude(user.getLatitude());
+            updateUsers.setLongitude(user.getLongitude());
+            repository.save(updateUsers);
+            return new ResponseEntity<>(HttpStatus.OK);
+            
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> userLogin(String idNumber, String password) {
+        Optional<Users> user =repository.findById(idNumber);
+        if(user.isPresent()){
+            Users existingUser=user.get();
+
+            if(existingUser.getPassword()==passwordEncoder.encode(password)){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }
